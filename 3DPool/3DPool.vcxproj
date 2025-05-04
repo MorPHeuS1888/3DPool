@@ -135,12 +135,18 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PoolTable.cpp" />
+    <ClCompile Include="ShaderUtils.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PoolTable.h" />
     <ClInclude Include="Renderable.h" />
+    <ClInclude Include="ShaderUtils.h" />
     <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\fragmentShader.glsl" />
+    <None Include="shaders\vertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

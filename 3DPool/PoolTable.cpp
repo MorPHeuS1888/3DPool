@@ -1,4 +1,5 @@
 #include "PoolTable.h"
+#include "ShaderUtils.h"
 #include <GL/glew.h>
 #include <iostream>
 
@@ -11,6 +12,12 @@ PoolTable::~PoolTable() {
 }
 
 void PoolTable::setup() {
+
+    std::string vertexCode = readShaderSource("shaders/vertexShader.glsl");
+    std::string fragmentCode = readShaderSource("shaders/fragmentShader.glsl");
+
+    shaderProgram = createShaderProgram(vertexCode.c_str(), fragmentCode.c_str());
+
     GLfloat vertices[] = {
         -1.0f, -0.5f, -1.5f,  1.0f, 0.0f, 0.0f,
          1.0f, -0.5f, -1.5f,  1.0f, 0.0f, 0.0f,
@@ -42,7 +49,13 @@ void PoolTable::setup() {
 }
 
 void PoolTable::render() {
+    glUseProgram(shaderProgram);
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 6); // Ajuste o número de vértices conforme necessário
     glBindVertexArray(0);
+}
+
+// Método para fornecer o shader à janela (para setar view/projection)
+GLuint PoolTable::getShaderProgram() const {
+    return shaderProgram;
 }
