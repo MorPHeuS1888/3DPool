@@ -1,7 +1,8 @@
+#define GLEW_STATIC
 #include "PoolTable.h"
 #include "ShaderUtils.h"
-#include <GL/glew.h>
 #include <iostream>
+#include <glm/gtc/type_ptr.hpp>
 
 PoolTable::PoolTable() : VBO(0), VAO(0) {}
 
@@ -13,21 +14,69 @@ PoolTable::~PoolTable() {
 
 void PoolTable::setup() {
 
+
     std::string vertexCode = readShaderSource("shaders/vertexShader.glsl");
     std::string fragmentCode = readShaderSource("shaders/fragmentShader.glsl");
 
     shaderProgram = createShaderProgram(vertexCode.c_str(), fragmentCode.c_str());
 
     GLfloat vertices[] = {
-        -1.0f, -0.5f, -1.5f,  1.0f, 0.0f, 0.0f,
-         1.0f, -0.5f, -1.5f,  1.0f, 0.0f, 0.0f,
-         1.0f,  0.5f, -1.5f,  1.0f, 0.0f, 0.0f,
+        // --- Face frontal ---
+        -0.71f, -0.39f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+         0.71f, -0.39f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+         0.71f,  0.00f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
 
-        -1.0f, -0.5f,  1.5f,  1.0f, 0.0f, 1.0f,
-         1.0f, -0.5f,  1.5f,  0.0f, 1.0f, 1.0f,
-         1.0f,  0.5f,  1.5f,  0.5f, 0.5f, 0.5f,
-         // Outras faces da mesa aqui
+        -0.71f, -0.39f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+         0.71f,  0.00f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+        -0.71f,  0.00f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+
+        // --- Face traseira ---
+        -0.71f, -0.39f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+         0.71f,  0.00f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+         0.71f, -0.39f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+
+        -0.71f, -0.39f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+        -0.71f,  0.00f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+         0.71f,  0.00f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+
+         // --- Face esquerda ---
+         -0.71f, -0.39f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+         -0.71f, -0.39f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+         -0.71f,  0.00f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+
+         -0.71f, -0.39f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+         -0.71f,  0.00f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+         -0.71f,  0.00f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+
+         // --- Face direita ---
+          0.71f, -0.39f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+          0.71f,  0.00f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+          0.71f, -0.39f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+
+          0.71f, -0.39f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+          0.71f,  0.00f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+          0.71f,  0.00f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+
+          // --- Face superior ---
+          -0.71f,  0.00f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+          -0.71f,  0.00f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+           0.71f,  0.00f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+
+          -0.71f,  0.00f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+           0.71f,  0.00f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+           0.71f,  0.00f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+
+           // --- Face inferior ---
+           -0.71f, -0.39f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+            0.71f, -0.39f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+           -0.71f, -0.39f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+
+           -0.71f, -0.39f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+            0.71f, -0.39f, -1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
+            0.71f, -0.39f,  1.42f,   0.0f, 0.6f, 0.0f,  // Cor verde
     };
+
+
 
     // Criando VAO e VBO
     glGenVertexArrays(1, &VAO);
@@ -50,10 +99,12 @@ void PoolTable::setup() {
 
 void PoolTable::render() {
     glUseProgram(shaderProgram);
+    glUniform3fv(glGetUniformLocation(shaderProgram, "boardColor"), 1, glm::value_ptr(glm::vec3(0.0f, 0.6f, 0.0f)));
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 6); // Ajuste o número de vértices conforme necessário
+    glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
 }
+
 
 // Método para fornecer o shader à janela (para setar view/projection)
 GLuint PoolTable::getShaderProgram() const {

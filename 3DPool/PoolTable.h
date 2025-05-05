@@ -1,3 +1,4 @@
+#define GLEW_STATIC
 #pragma once
 #include <GL/glew.h>
 #include "Renderable.h"

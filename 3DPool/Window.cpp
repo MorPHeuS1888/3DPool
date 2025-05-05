@@ -1,3 +1,4 @@
+#define GLEW_STATIC
 #include "Window.h"
 #include "Renderable.h" 
 #include "PoolTable.h"
@@ -53,25 +54,40 @@ void Window::processInput() {
 void Window::update(Renderable* scene) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Cria matrizes com GLM
+    // Cria matrizes com GLM 
     glm::mat4 projection = glm::perspective(glm::radians(70.0f), (float)width / height, 0.1f, 100.0f);
     glm::mat4 view = glm::lookAt(
-        glm::vec3(0.0f, 3.0f, 5.0f),  // posição da câmera
+        glm::vec3(-2.0f, 2.0f, 2.0f),  // posição da câmera
         glm::vec3(0.0f, 0.0f, 0.0f),  // para onde olha
-        glm::vec3(0.0f, 1.0f, 0.0f)   // vetor up
+        glm::vec3(0.0f, 2.0f, 0.0f)   // vetor up
     );
+
+    // Posição da luz (exemplo)
+    glm::vec3 lightPos(1.0f, 1.0f, 1.0f); // Pode ser alterado conforme necessário
+    glm::vec3 lightColor(1.0f, 1.0f, 1.0f); // Luz branca
 
     // Passa as matrizes para o shader do objeto (se possível)
     PoolTable* table = dynamic_cast<PoolTable*>(scene);
     if (table) {
-        GLuint shader = table->getShaderProgram();  
+        GLuint shader = table->getShaderProgram();
         glUseProgram(shader);
 
         GLint viewLoc = glGetUniformLocation(shader, "view");
         GLint projLoc = glGetUniformLocation(shader, "projection");
+        GLint modelLoc = glGetUniformLocation(shader, "model");
 
+        GLint lightPosLoc = glGetUniformLocation(shader, "lightPos");
+        GLint viewPosLoc = glGetUniformLocation(shader, "viewPos");
+        GLint lightColorLoc = glGetUniformLocation(shader, "lightColor");
+
+        // Envia as matrizes e variáveis de luz para o shader
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)));
+
+        glUniform3fv(lightPosLoc, 1, glm::value_ptr(lightPos));
+        glUniform3fv(viewPosLoc, 1, glm::value_ptr(glm::vec3(-2.0f, 2.0f, 2.0f))); // posição da câmera
+        glUniform3fv(lightColorLoc, 1, glm::value_ptr(lightColor));
     }
 
     // Renderiza a cena
