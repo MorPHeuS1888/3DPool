@@ -86,12 +86,15 @@ void PoolTable::setup() {
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    // Layout dos atributos: posição e cor
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
-    glEnableVertexAttribArray(0);
+    // Layout dos atributos: posiï¿½ï¿½o e cor
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0); // posiÃ§Ã£o
+glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(1);
+glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat))); // normal
+glEnableVertexAttribArray(1);
+
+glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat))); // cor
+glEnableVertexAttribArray(2);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
@@ -106,7 +109,7 @@ void PoolTable::render() {
 }
 
 
-// Método para fornecer o shader à janela (para setar view/projection)
+// Mï¿½todo para fornecer o shader ï¿½ janela (para setar view/projection)
 GLuint PoolTable::getShaderProgram() const {
     return shaderProgram;
 }
