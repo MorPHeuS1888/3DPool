@@ -54,49 +54,78 @@ void Window::processInput() {
 void Window::update(Renderable* scene) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Cria matrizes com GLM 
+    // --- Configuração da câmera principal ---
     glm::mat4 projection = glm::perspective(glm::radians(70.0f), (float)width / height, 0.1f, 100.0f);
     glm::mat4 view = glm::lookAt(
-        glm::vec3(-2.0f, 2.0f, 2.0f),  // posição da câmera
+        glm::vec3(-2.0f, 2.0f, 2.0f),  // posição da câmera principal
         glm::vec3(0.0f, 0.0f, 0.0f),  // para onde olha
-        glm::vec3(0.0f, 2.0f, 0.0f)   // vetor up
+        glm::vec3(0.0f, 1.0f, 0.0f)   // vetor up
     );
 
-    // Posição da luz (exemplo)
-    glm::vec3 lightPos(1.0f, 1.0f, 1.0f); // Pode ser alterado conforme necessário
-    glm::vec3 lightColor(1.0f, 1.0f, 1.0f); // Luz branca
+    // --- Configuração da câmera do mini mapa ---
+    glm::mat4 miniMapProjection = glm::ortho(-2.0f, 2.0f, -2.0f, 2.0f, 0.1f, 10.0f);
+    glm::mat4 miniMapView = glm::lookAt(
+        glm::vec3(0.0f, 5.0f, 0.0f),  // posição da câmera do mini mapa (acima do retângulo)
+        glm::vec3(0.0f, 0.0f, 0.0f),  // para onde olha
+        glm::vec3(0.0f, 0.0f, -1.0f)  // vetor up (invertido para visão de cima)
+    );
 
-    // Passa as matrizes para o shader do objeto (se possível)
+    // Posição e cor da luz
+    glm::vec3 lightPos(1.0f, 1.0f, 1.0f);
+    glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
+
+    // Renderiza a visão principal
     PoolTable* table = dynamic_cast<PoolTable*>(scene);
     if (table) {
         GLuint shader = table->getShaderProgram();
         glUseProgram(shader);
 
-        GLint viewLoc = glGetUniformLocation(shader, "view");
-        GLint projLoc = glGetUniformLocation(shader, "projection");
-        GLint modelLoc = glGetUniformLocation(shader, "model");
+        // Envia as matrizes para o shader
+        glUniformMatrix4fv(glGetUniformLocation(shader, "view"), 1, GL_FALSE, glm::value_ptr(view));
+        glUniformMatrix4fv(glGetUniformLocation(shader, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+        glUniformMatrix4fv(glGetUniformLocation(shader, "model"), 1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)));
 
-        GLint lightPosLoc = glGetUniformLocation(shader, "lightPos");
-        GLint viewPosLoc = glGetUniformLocation(shader, "viewPos");
-        GLint lightColorLoc = glGetUniformLocation(shader, "lightColor");
+        // Envia as variáveis de luz
+        glUniform3fv(glGetUniformLocation(shader, "lightPos"), 1, glm::value_ptr(lightPos));
+        glUniform3fv(glGetUniformLocation(shader, "viewPos"), 1, glm::value_ptr(glm::vec3(-2.0f, 2.0f, 2.0f)));
+        glUniform3fv(glGetUniformLocation(shader, "lightColor"), 1, glm::value_ptr(lightColor));
 
-        // Envia as matrizes e variáveis de luz para o shader
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)));
-
-        glUniform3fv(lightPosLoc, 1, glm::value_ptr(lightPos));
-        glUniform3fv(viewPosLoc, 1, glm::value_ptr(glm::vec3(-2.0f, 2.0f, 2.0f))); // posição da câmera
-        glUniform3fv(lightColorLoc, 1, glm::value_ptr(lightColor));
+        // Ativa a iluminação
+        glUniform1i(glGetUniformLocation(shader, "useLighting"), 1);
     }
 
-    // Renderiza a cena
     if (scene) scene->render();
+
+   
+    // Renderiza o mini mapa
+    int miniMapWidth = 200;  // Largura do mini mapa
+    int miniMapHeight = 200; // Altura do mini mapa
+    glViewport(width - 150, height - 180, miniMapWidth, miniMapHeight); // Define o viewport no canto superior direito
+
+    if (table) {
+        GLuint shader = table->getShaderProgram();
+        glUseProgram(shader);
+
+        // Envia as matrizes para o shader
+        glUniformMatrix4fv(glGetUniformLocation(shader, "view"), 1, GL_FALSE, glm::value_ptr(miniMapView));
+        glUniformMatrix4fv(glGetUniformLocation(shader, "projection"), 1, GL_FALSE, glm::value_ptr(miniMapProjection));
+        glUniformMatrix4fv(glGetUniformLocation(shader, "model"), 1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)));
+
+        // Desativa a iluminação
+        glUniform1i(glGetUniformLocation(shader, "useLighting"), 0);
+    }
+
+    if (scene) scene->render();
+
+    // Restaura o viewport para a visão principal
+    glViewport(0, 0, width, height);
 
     // Troca os buffers e processa eventos
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
+
+
 
 
 bool Window::shouldClose() const {
