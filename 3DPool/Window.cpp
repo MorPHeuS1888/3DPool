@@ -146,7 +146,7 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
 // Callback de movimento do mouse (para a câmera orbital)
 void Window::mouseCallback(GLFWwindow* window, double xpos, double ypos) {
     Window* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
-    self->camera.processMouseMovement(static_cast<float>(xpos), static_cast<float>(ypos));
+    self->camera.processMouseMovement(static_cast<float>(xpos), static_cast<float>(-ypos));
 }
 
 // Callback de pressionamento do mouse (para ativar ou desativar o movimento)
