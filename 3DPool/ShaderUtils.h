@@ -1,3 +1,4 @@
+#pragma once
 #ifndef SHADER_UTILS_H
 #define SHADER_UTILS_H
 
@@ -14,4 +15,4 @@ GLuint compileShader(GLenum type, const char* source);
 GLuint createShaderProgram(const char* vertexSource, const char* fragmentSource);
 
 #endif
-#pragma once
+

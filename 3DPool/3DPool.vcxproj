@@ -135,12 +135,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PoolTable.cpp" />
     <ClCompile Include="ShaderUtils.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
     <ClInclude Include="PoolTable.h" />
     <ClInclude Include="Renderable.h" />
     <ClInclude Include="ShaderUtils.h" />

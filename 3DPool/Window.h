@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Renderable.h"
+#include "Camera.h"
 #include <iostream>
 
 class Window {
@@ -15,7 +16,13 @@ public:
     bool shouldClose() const; // Verifica se a janela deve fechar
 
 private:
-    GLFWwindow* window; // Ponteiro para a janela GLFW
+    GLFWwindow* window;
+    int width, height;
+
     static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-    int width, height; // Largura e altura da janela
+    static void mouseCallback(GLFWwindow* window, double xpos, double ypos);
+    static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+    static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
+
+    Camera camera;
 };
