@@ -15,8 +15,8 @@ PoolTable::~PoolTable() {
 void PoolTable::setup() {
 
 
-    std::string vertexCode = readShaderSource("shaders/vertexShader.glsl");
-    std::string fragmentCode = readShaderSource("shaders/fragmentShader.glsl");
+    std::string vertexCode = readShaderSource("shaders/vertexShader.ver");
+    std::string fragmentCode = readShaderSource("shaders/fragmentShader.frag");
 
     shaderProgram = createShaderProgram(vertexCode.c_str(), fragmentCode.c_str());
 

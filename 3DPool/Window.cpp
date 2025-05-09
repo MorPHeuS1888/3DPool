@@ -39,7 +39,7 @@ Window::Window(int width, int height, const char* title) : width(width), height(
 
 	glEnable(GL_DEPTH_TEST); // Habilita o teste de profundidade
 
-	glClearColor(0.3f, 0.3f, 0.3f, 1.0f); // Cor de fundo da janela
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // Cor de fundo da janela
 }
 
 Window::~Window() {
@@ -71,7 +71,7 @@ void Window::update(Renderable* scene) {
     );
 
     // Posição e cor da luz
-    glm::vec3 lightPos(1.0f, 1.0f, 1.0f);
+    glm::vec3 lightPos(1.0f, 2.0f, 2.0f);
     glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
     // Renderiza a visão principal
