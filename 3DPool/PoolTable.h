@@ -9,7 +9,7 @@ public:
     ~PoolTable();   // Destruidor
 
     void setup();    // Configuração do paralelepípedo (mesa de bilhar)
-    void render() override;   // Renderização da mesa de bilhar
+    void render(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& lightPos, const glm::vec3& viewPos, const glm::vec3& lightColor, bool useLighting) override;
     GLuint getShaderProgram() const;
 
 private:
