@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="Balls.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PoolTable.cpp" />
     <ClCompile Include="ShaderUtils.cpp" />
@@ -145,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="Balls.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="PoolTable.h" />
     <ClInclude Include="Renderable.h" />
     <ClInclude Include="ShaderUtils.h" />

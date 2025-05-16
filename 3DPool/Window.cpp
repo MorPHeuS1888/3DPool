@@ -7,6 +7,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "Balls.h"
 
+int Lighttype = 0;
+
 Window::Window(int width, int height, const char* title) : width(width), height(height) {
     if (!glfwInit()) {
         std::cerr << "Falha ao inicializar o GLFW" << std::endl;
@@ -121,6 +123,12 @@ void Window::update(Renderable* scene) {
 void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
+    }
+    if (key == GLFW_KEY_1 && action == GLFW_PRESS) {
+        Lighttype = 0;
+    }
+    if (key == GLFW_KEY_2 && action == GLFW_PRESS) {
+        Lighttype = 1;
     }
 }
 
