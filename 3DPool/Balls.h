@@ -1,3 +1,4 @@
+// Balls.h
 #pragma once
 #include "Renderable.h"
 #include <vector>
@@ -5,26 +6,54 @@
 #include <GL/glew.h>
 #include <string> 
 
+namespace PoolLibrary {
+    class ModelManager {
+    public:
+        struct ModelData {
+            GLuint VAO;
+            GLuint VBO;
+            GLuint textureID;
+            int vertexCount;
+            std::vector<float> vertices;
+            std::string texturePath;
+        };
+
+        bool Load(const std::string& obj_model_filepath);
+        void Install(void);
+        void Render(const glm::vec3& position, const glm::vec3& orientation);
+        void BindShaderAttributes(GLuint shaderProgram);
+
+        void SetVertices(const std::vector<float>& vertices) {
+            modelData.vertices = vertices;
+            modelData.vertexCount = vertices.size() / 8; 
+        }
+
+        ModelData& GetModelData() { return modelData; }
+
+    private:
+        ModelData modelData;
+        void loadMaterials(const std::string& mtlPath);
+    };
+}
+
 class Balls : public Renderable {
 public:
     Balls();
     ~Balls();
 
     void setup();
-    void render(const glm::mat4& view, const glm::mat4& projection, const glm::vec3& lightPos, const glm::vec3& viewPos, const glm::vec3& lightColor, bool useLighting) override;
+    void render(const glm::mat4& view, const glm::mat4& projection,
+        const glm::vec3& lightPos, const glm::vec3& viewPos,
+        const glm::vec3& lightColor, bool useLighting) override;
 
 private:
     struct Ball {
-        GLuint VAO;
-        GLuint VBO;
-        GLuint textureID;
-        int vertexCount;
+        PoolLibrary::ModelManager model;
         glm::vec3 position;
+        glm::vec3 rotation; // Adicionado para armazenar rotação
     };
 
     std::vector<Ball> balls;
     GLuint shaderProgram;
 
-    void loadBallModel(const std::string& path, Ball& ball);
-    void createTriangleFormation(std::vector<glm::vec3>& positions);
 };

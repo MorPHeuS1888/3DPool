@@ -1,18 +1,44 @@
-#pragma once
-#ifndef SHADER_UTILS_H
-#define SHADER_UTILS_H
+ï»¿#include <GL\gl.h>
 
-#include <string>
-#include <GL/glew.h>
+/*****************************************************************************
+					 GLuint LoadShaders(ShaderInfo*);
 
-// Lê um shader de um ficheiro
-std::string readShaderSource(const std::string& filePath);
+Descriï¿½ï¿½o:
+----------
+Recebe um array de estruturas ShaderInfo.
+Cada estrutura contï¿½m:
+- tipo de shader. No OpenGL 4.x poderï¿½ ser um dos seguintes valores:
+  - GL_COMPUTE_SHADER
+  - GL_VERTEX_SHADER
+  - GL_TESS_CONTROL_SHADER
+  - GL_TESS_EVALUATION_SHADER
+  - GL_GEOMETRY_SHADER
+  - GL_FRAGMENT_SHADER
+- apontador para uma C-string, que contï¿½m o nome do ficheiro com cï¿½digo do shader
+- valor que referencia o objeto shader criado
 
-// Compila um shader individual
-GLuint compileShader(GLenum type, const char* source);
+O array de estruturas deverï¿½ terminar com o valor GL_NONE no campo 'type'.
+Exemplo:
+ShaderInfo  shaders[] = {
+	{ GL_VERTEX_SHADER, "triangles.vert" },
+	{ GL_FRAGMENT_SHADER, "triangles.frag" },
+	{ GL_NONE, NULL }
+};
 
-// Compila e linka um programa completo
-GLuint createShaderProgram(const char* vertexSource, const char* fragmentSource);
+Retorno:
+--------
+Em caso de sucesso, a funï¿½ï¿½o retorna o valore que referencia o objeto programa.
+Em caso de erro, serï¿½ retornado o valor zero (0).
 
-#endif
+*****************************************************************************/
 
+// Descomentar para debug
+#define _DEBUG
+
+typedef struct {
+	GLenum       type;
+	const char* filename;
+	GLuint       shader;
+} ShaderInfo;
+
+GLuint LoadShaders(ShaderInfo*);

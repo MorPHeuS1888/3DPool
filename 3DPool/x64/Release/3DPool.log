@@ -1,14 +1,15 @@
-﻿  Window.cpp
-  main.cpp
+﻿  main.cpp
+C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Balls.h(28,53): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
+  (compilando o arquivo fonte 'main.cpp')
+  
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
   Gerando código
-  4 of 695 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    7 functions had inline decision re-evaluated but remain unchanged
+  0 of 744 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finalizada a geração de código
 glew32s.lib(glew.obj) : warning LNK4099: PDB '' não foi encontrado 'glew32s.lib(glew.obj)' ou no ''; vinculando objeto quando quando sem nenhuma informação de depuração
 LINK : warning LNK4286: o símbolo '__glewUniform3fv' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
-LINK : warning LNK4286: o símbolo '__glewDeleteBuffers' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewGenerateMipmap' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewGenBuffers' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewUniformMatrix4fv' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
@@ -16,22 +17,10 @@ LINK : warning LNK4286: o símbolo '__glewGenVertexArrays' definido em 'glew32s.
 LINK : warning LNK4286: o símbolo '__glewActiveTexture' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewBufferData' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewGetUniformLocation' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
-LINK : warning LNK4286: o símbolo '__glewDeleteVertexArrays' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewUniform1i' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewBindBuffer' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewVertexAttribPointer' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewUseProgram' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewBindVertexArray' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewEnableVertexAttribArray' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
-LINK : warning LNK4286: o símbolo '__glewLinkProgram' definido em 'glew32s.lib(glew.obj)' é importado por 'ShaderUtils.obj'
-LINK : warning LNK4286: o símbolo '__glewDeleteShader' definido em 'glew32s.lib(glew.obj)' é importado por 'ShaderUtils.obj'
-LINK : warning LNK4286: o símbolo '__glewGetProgramInfoLog' definido em 'glew32s.lib(glew.obj)' é importado por 'ShaderUtils.obj'
-LINK : warning LNK4286: o símbolo '__glewShaderSource' definido em 'glew32s.lib(glew.obj)' é importado por 'ShaderUtils.obj'
-LINK : warning LNK4286: o símbolo '__glewAttachShader' definido em 'glew32s.lib(glew.obj)' é importado por 'ShaderUtils.obj'
-LINK : warning LNK4286: o símbolo '__glewGetProgramiv' definido em 'glew32s.lib(glew.obj)' é importado por 'ShaderUtils.obj'
-LINK : warning LNK4286: o símbolo '__glewGetShaderInfoLog' definido em 'glew32s.lib(glew.obj)' é importado por 'ShaderUtils.obj'
-LINK : warning LNK4286: o símbolo '__glewCreateProgram' definido em 'glew32s.lib(glew.obj)' é importado por 'ShaderUtils.obj'
-LINK : warning LNK4286: o símbolo '__glewCreateShader' definido em 'glew32s.lib(glew.obj)' é importado por 'ShaderUtils.obj'
-LINK : warning LNK4286: o símbolo '__glewCompileShader' definido em 'glew32s.lib(glew.obj)' é importado por 'ShaderUtils.obj'
-LINK : warning LNK4286: o símbolo '__glewGetShaderiv' definido em 'glew32s.lib(glew.obj)' é importado por 'ShaderUtils.obj'
   3DPool.vcxproj -> C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\x64\Release\3DPool.exe
