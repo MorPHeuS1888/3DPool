@@ -1,6 +1,11 @@
-﻿  main.cpp
+﻿  camera.cpp
+  main.cpp
 C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Balls.h(28,53): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
   (compilando o arquivo fonte 'main.cpp')
+  
+  Window.cpp
+C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Balls.h(28,53): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
+  (compilando o arquivo fonte 'Window.cpp')
   
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
   Gerando código

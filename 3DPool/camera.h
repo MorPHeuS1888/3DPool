@@ -18,11 +18,12 @@ public:
 
 private:
     float yaw, pitch;
-    float radius;
+    float distance;  // Distance from center
     float lastX, lastY;
     bool firstMouse;
     bool leftMousePressed;
 
     glm::vec3 position;
+    glm::vec3 center;  // Center point to look at (table center)
     glm::mat4 viewMatrix;
 };
