@@ -105,6 +105,3 @@ void PoolTable::render(const glm::mat4& view, const glm::mat4& projection,
     model.Render(glm::vec3(0.0f), glm::vec3(0.0f));
 }
 
-GLuint PoolTable::getShaderProgram() const {
-    return shaderProgram;
-}

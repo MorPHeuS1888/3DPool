@@ -14,9 +14,9 @@ public:
     void render(const glm::mat4& view, const glm::mat4& projection,
         const glm::vec3& lightPos, const glm::vec3& viewPos,
         const glm::vec3& lightColor, bool useLighting) override;
-    GLuint getShaderProgram() const;
+    GLuint getShaderProgram() const override { return shaderProgram; }
 
 private:
-    PoolLibrary::ModelManager model;
     GLuint shaderProgram;
+    PoolLibrary::ModelManager model;
 };

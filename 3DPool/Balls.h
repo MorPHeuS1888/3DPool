@@ -4,6 +4,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
+#include "light.h"
 #include <string> 
 
 namespace PoolLibrary {
@@ -45,8 +46,10 @@ public:
     void render(const glm::mat4& view, const glm::mat4& projection,
         const glm::vec3& lightPos, const glm::vec3& viewPos,
         const glm::vec3& lightColor, bool useLighting) override;
+    GLuint getShaderProgram() const override { return shaderProgram; }
 
 private:
+    GLuint shaderProgram;
     struct Ball {
         PoolLibrary::ModelManager model;
         glm::vec3 position;
@@ -54,6 +57,5 @@ private:
     };
 
     std::vector<Ball> balls;
-    GLuint shaderProgram;
 
 };

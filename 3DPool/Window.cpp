@@ -1,6 +1,7 @@
 #define GLEW_STATIC
 #include "Window.h"
 #include "PoolTable.h"
+#include "light.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -86,6 +87,9 @@ void Window::update(Renderable* scene) {
     glm::vec3 lightPos(1.0f, 2.0f, 2.0f);
     glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
+    glUseProgram(scene->getShaderProgram()); // Ativa o shader
+    light.update(scene->getShaderProgram(), camera.getPosition());
+
     // Renderização principal
     glViewport(0, 0, width, height);
     if (scene) {
@@ -119,8 +123,53 @@ void Window::update(Renderable* scene) {
 
 // Outros callbacks mantidos iguais
 void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    Window* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
+
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+        std::cout << "ESC key pressed - closing window" << std::endl;
         glfwSetWindowShouldClose(window, true);
+    }
+
+    if (action == GLFW_PRESS) {
+        std::cout << "Key PRESSED: ";
+        switch (key) {
+        case GLFW_KEY_1:
+            self->light.toggleAmbient();
+            std::cout << "1 (Ambient light) - Estado: "
+                << (self->light.isAmbientEnabled() ? "ON" : "OFF");
+            break;
+        case GLFW_KEY_2:
+            self->light.toggleDirectional();
+            std::cout << "2 (Directional light) - Estado: "
+                << (self->light.isDirectionalEnabled() ? "ON" : "OFF");
+            break;
+        case GLFW_KEY_3:
+            self->light.togglePoint();
+            std::cout << "3 (Point light) - Estado: "
+                << (self->light.isPointEnabled() ? "ON" : "OFF");
+            break;
+        case GLFW_KEY_4:
+            self->light.toggleSpot();
+            std::cout << "4 (Spot light) - Estado: "
+                << (self->light.isSpotEnabled() ? "ON" : "OFF");
+            break;
+        default:
+            std::cout << "Unknown key: " << key;
+            break;
+        }
+        std::cout << std::endl;
+    }
+    else if (action == GLFW_REPEAT) {
+        // Mantido igual pois o repeat não altera estados
+        std::cout << "Key REPEAT: ";
+        switch (key) {
+        case GLFW_KEY_1: std::cout << "1"; break;
+        case GLFW_KEY_2: std::cout << "2"; break;
+        case GLFW_KEY_3: std::cout << "3"; break;
+        case GLFW_KEY_4: std::cout << "4"; break;
+        default: std::cout << key; break;
+        }
+        std::cout << std::endl;
     }
 }
 

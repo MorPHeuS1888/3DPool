@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include "Renderable.h"
 #include "Camera.h"
+#include "Light.h"
 #include <iostream>
 
 class Window {
@@ -19,6 +20,7 @@ public:
 private:
     GLFWwindow* window;
     int width, height;
+    Light light;
 
     // Callbacks estáticos
     static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);

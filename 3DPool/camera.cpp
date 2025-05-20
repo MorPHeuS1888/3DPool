@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include <iostream> // Add this include for debug output
 
 Camera::Camera()
     : yaw(-90.0f), pitch(30.0f), distance(5.0f),
@@ -8,9 +9,9 @@ Camera::Camera()
 }
 
 void Camera::processMouseMovement(float xpos, float ypos) {
-    if (!leftMousePressed) return;
 
     if (firstMouse) {
+
         lastX = xpos;
         lastY = ypos;
         firstMouse = false;
@@ -29,7 +30,6 @@ void Camera::processMouseMovement(float xpos, float ypos) {
     // Constrain pitch to avoid flipping
     if (pitch > 89.0f) pitch = 89.0f;
     if (pitch < -89.0f) pitch = -89.0f;
-
     updateViewMatrix();
 }
 
@@ -37,7 +37,6 @@ void Camera::processMouseScroll(float yoffset) {
     distance -= yoffset * 0.2f;
     if (distance < 1.0f) distance = 1.0f;
     if (distance > 15.0f) distance = 15.0f;
-
     updateViewMatrix();
 }
 
@@ -48,6 +47,7 @@ void Camera::updateViewMatrix() {
     position.z = center.z + distance * sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 
     viewMatrix = glm::lookAt(position, center, glm::vec3(0.0f, 1.0f, 0.0f));
+    
 }
 
 glm::mat4 Camera::getViewMatrix() const {

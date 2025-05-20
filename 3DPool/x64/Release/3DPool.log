@@ -1,17 +1,12 @@
-﻿  camera.cpp
-  main.cpp
-C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Balls.h(28,53): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
-  (compilando o arquivo fonte 'main.cpp')
-  
-  Window.cpp
-C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Balls.h(28,53): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
+﻿  Window.cpp
+C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Balls.h(29,53): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
   (compilando o arquivo fonte 'Window.cpp')
   
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
   Gerando código
-  0 of 744 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  6 of 757 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+    4 functions were new in current compilation
+    14 functions had inline decision re-evaluated but remain unchanged
   Finalizada a geração de código
 glew32s.lib(glew.obj) : warning LNK4099: PDB '' não foi encontrado 'glew32s.lib(glew.obj)' ou no ''; vinculando objeto quando quando sem nenhuma informação de depuração
 LINK : warning LNK4286: o símbolo '__glewUniform3fv' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
@@ -28,4 +23,6 @@ LINK : warning LNK4286: o símbolo '__glewVertexAttribPointer' definido em 'glew
 LINK : warning LNK4286: o símbolo '__glewUseProgram' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewBindVertexArray' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewEnableVertexAttribArray' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
+LINK : warning LNK4286: o símbolo '__glewUniform3f' definido em 'glew32s.lib(glew.obj)' é importado por 'light.obj'
+LINK : warning LNK4286: o símbolo '__glewUniform1f' definido em 'glew32s.lib(glew.obj)' é importado por 'light.obj'
   3DPool.vcxproj -> C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\x64\Release\3DPool.exe
