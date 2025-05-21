@@ -42,7 +42,7 @@ void Light::update(GLuint shaderProgram, const glm::vec3& viewPos) {
 
     // Ambient light
     glUniform1i(glGetUniformLocation(shaderProgram, "ambientEnabled"), ambientEnabled);
-    glUniform3f(glGetUniformLocation(shaderProgram, "ambientLight"), 0.2f, 0.2f, 0.2f);
+    glUniform3f(glGetUniformLocation(shaderProgram, "ambientLight"), 0.6f, 0.6f, 0.6f);
 
     // Directional light
     glUniform1i(glGetUniformLocation(shaderProgram, "directionalEnabled"), directionalEnabled);

@@ -87,7 +87,8 @@ void Window::update(Renderable* scene) {
     glm::vec3 lightPos(1.0f, 2.0f, 2.0f);
     glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
-    glUseProgram(scene->getShaderProgram()); // Ativa o shader
+    // Atualiza as luzes para a vista principal
+    glUseProgram(scene->getShaderProgram());
     light.update(scene->getShaderProgram(), camera.getPosition());
 
     // Renderização principal
@@ -96,7 +97,7 @@ void Window::update(Renderable* scene) {
         scene->render(view, projection, lightPos, camera.getPosition(), lightColor, true);
     }
 
-    // Mini mapa (ajuste dinâmico)
+    // Mini mapa: Forçar apenas luz ambiente
     int miniMapSize = 200;
     int margin = 10;
     glViewport(
@@ -114,7 +115,16 @@ void Window::update(Renderable* scene) {
     );
 
     if (scene) {
-        scene->render(miniMapView, miniMapProjection, lightPos, camera.getPosition(), lightColor, false);
+        // Forçar luz ambiente e desativar outras
+        GLuint shader = scene->getShaderProgram();
+        glUseProgram(shader);
+        glUniform1i(glGetUniformLocation(shader, "ambientEnabled"), 1);
+        glUniform1i(glGetUniformLocation(shader, "directionalEnabled"), 0);
+        glUniform1i(glGetUniformLocation(shader, "pointEnabled"), 0);
+        glUniform1i(glGetUniformLocation(shader, "spotEnabled"), 0);
+        glUniform3f(glGetUniformLocation(shader, "ambientLight"), 0.8f, 0.8f, 0.8f);
+
+        scene->render(miniMapView, miniMapProjection, lightPos, camera.getPosition(), lightColor, true);
     }
 
     // Restaura viewport principal

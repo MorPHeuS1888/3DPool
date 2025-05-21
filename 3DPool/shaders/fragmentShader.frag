@@ -106,6 +106,6 @@ void main() {
         lighting += diffuse * color.rgb;
     }
 
-    vec3 result = lighting * color.rgb;
+   vec3 result = lighting * color.rgb;
     FragColor = vec4(result, color.a);
 }
