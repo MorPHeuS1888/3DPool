@@ -140,6 +140,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="light.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="PoolTable.cpp" />
     <ClCompile Include="ShaderUtils.cpp" />
     <ClCompile Include="Window.cpp" />

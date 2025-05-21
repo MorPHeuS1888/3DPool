@@ -3,7 +3,8 @@
 #pragma once
 #include <GL/glew.h>
 #include "Renderable.h"
-#include "Balls.h" // This includes the PoolLibrary namespace
+#include "Balls.h" 
+
 
 class PoolTable : public Renderable {
 public:
