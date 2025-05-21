@@ -29,7 +29,7 @@ Light::Light() :
 
 void Light::setup(GLuint shaderProgram) {
     glUseProgram(shaderProgram);
-
+    
     // Set initial light states
     glUniform1i(glGetUniformLocation(shaderProgram, "ambientEnabled"), ambientEnabled);
     glUniform1i(glGetUniformLocation(shaderProgram, "directionalEnabled"), directionalEnabled);

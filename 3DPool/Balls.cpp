@@ -1,4 +1,4 @@
-// Balls.cpp
+#define STB_IMAGE_IMPLEMENTATION
 #include "Balls.h"
 #include "ShaderUtils.h"
 #include <iostream>
@@ -9,8 +9,8 @@
 #include <cstdlib> 
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/constants.hpp>
-#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#include "ModelManager.h"
 
 namespace PoolLibrary {
     bool ModelManager::Load(const std::string& obj_model_filepath) {

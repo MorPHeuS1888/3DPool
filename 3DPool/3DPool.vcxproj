@@ -148,6 +148,7 @@
     <ClInclude Include="Balls.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="light.h" />
+    <ClInclude Include="ModelManager.h" />
     <ClInclude Include="PoolTable.h" />
     <ClInclude Include="Renderable.h" />
     <ClInclude Include="ShaderUtils.h" />
