@@ -8,7 +8,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "Balls.h"
 
-Window::Window(int width, int height, const char* title) : width(width), height(height) {
+Window::Window(int width, int height, const char* title) :
+    width(width), height(height),
+    rotationX(0.0f), rotationY(0.0f), zoom(-3.0f),
+    isMouseDragging(false), lastMouseX(0), lastMouseY(0) {
     if (!glfwInit()) {
         std::cerr << "Falha ao inicializar o GLFW" << std::endl;
         exit(-1);
@@ -83,12 +86,24 @@ void Window::update(Renderable* scene) {
         20.0f
     );
 
+    // Calcular matriz global (rotação + zoom)
+    glm::mat4 globalModel = glm::mat4(1.0f);
+    globalModel = glm::translate(globalModel, glm::vec3(0.0f, 0.0f, zoom));
+    globalModel = glm::rotate(globalModel, rotationX, glm::vec3(1.0f, 0.0f, 0.0f));
+    globalModel = glm::rotate(globalModel, rotationY, glm::vec3(0.0f, 1.0f, 0.0f));
     glm::mat4 view = camera.getViewMatrix();
     glm::vec3 lightPos(1.0f, 2.0f, 2.0f);
     glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
-    // Atualiza as luzes para a vista principal
+    // Enviar para o shader
     glUseProgram(scene->getShaderProgram());
+    glUniformMatrix4fv(
+        glGetUniformLocation(scene->getShaderProgram(), "globalModel"),
+        1, GL_FALSE, glm::value_ptr(globalModel)
+    );
+
+    // Atualiza as luzes para a vista principal
+  
     light.update(scene->getShaderProgram(), camera.getPosition());
 
     // Renderização principal
@@ -96,6 +111,7 @@ void Window::update(Renderable* scene) {
     if (scene) {
         scene->render(view, projection, lightPos, camera.getPosition(), lightColor, true);
     }
+
 
     // Mini mapa: Forçar apenas luz ambiente
     int miniMapSize = 200;
@@ -107,11 +123,11 @@ void Window::update(Renderable* scene) {
         miniMapSize
     );
 
-    glm::mat4 miniMapProjection = glm::ortho(-2.0f, 2.0f, -2.0f, 2.0f, 0.1f, 10.0f);
+    glm::mat4 miniMapProjection = glm::ortho(-1.5f, 1.5f, -2.5f, 0.5f, 0.1f, 10.0f);
     glm::mat4 miniMapView = glm::lookAt(
-        glm::vec3(0.0f, 5.0f, 0.0f),
-        glm::vec3(0.0f, 0.0f, 0.0f),
-        glm::vec3(0.0f, 0.0f, -1.0f)
+        glm::vec3(0.0f, 5.0f, 0.0f), // Posição da câmera (acima da mesa)
+        glm::vec3(0.0f, 0.0f, -1.0f), // Olhando para o centro da mesa
+        glm::vec3(0.0f, 0.0f, -1.0f)  // Orientação corrigida (eixo Y para cima)
     );
 
     if (scene) {
@@ -123,6 +139,12 @@ void Window::update(Renderable* scene) {
         glUniform1i(glGetUniformLocation(shader, "pointEnabled"), 0);
         glUniform1i(glGetUniformLocation(shader, "spotEnabled"), 0);
         glUniform3f(glGetUniformLocation(shader, "ambientLight"), 0.8f, 0.8f, 0.8f);
+
+        // Renderize sem aplicar transformações globais (globalModel)
+        glUniformMatrix4fv(
+            glGetUniformLocation(shader, "globalModel"),
+            1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)) // Matriz identidade
+        );
 
         scene->render(miniMapView, miniMapProjection, lightPos, camera.getPosition(), lightColor, true);
     }
@@ -185,19 +207,26 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
 
 void Window::mouseCallback(GLFWwindow* window, double xpos, double ypos) {
     Window* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
-    self->camera.processMouseMovement(static_cast<float>(xpos), static_cast<float>(-ypos));
+    if (self->isMouseDragging) {
+        self->rotationY += (xpos - self->lastMouseX) * 0.01f;
+        self->rotationX += (self->lastMouseY - ypos) * 0.01f; // Invertido para movimento natural
+        self->lastMouseX = xpos;
+        self->lastMouseY = ypos;
+    }
 }
 
 void Window::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
     Window* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        self->camera.setMousePressed(action == GLFW_PRESS);
+        self->isMouseDragging = (action == GLFW_PRESS);
+        glfwGetCursorPos(window, &self->lastMouseX, &self->lastMouseY);
     }
 }
 
 void Window::scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
     Window* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
-    self->camera.processMouseScroll(static_cast<float>(yoffset));
+    self->zoom += static_cast<float>(yoffset) * 0.2f;
+    self->zoom = glm::clamp(self->zoom, -10.0f, -1.0f);
 }
 
 GLFWwindow* Window::getWindow() const {

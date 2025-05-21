@@ -1,7 +1,12 @@
-﻿  light.cpp
+﻿  Window.cpp
+C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Balls.h(29,53): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
+  (compilando o arquivo fonte 'Window.cpp')
+  
+C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Window.cpp(211,54): warning C4244: '+=': conversão de 'double' para 'float', possível perda de dados
+C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Window.cpp(212,54): warning C4244: '+=': conversão de 'double' para 'float', possível perda de dados
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
   Gerando código
-  1 of 757 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 756 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     8 functions had inline decision re-evaluated but remain unchanged
   Finalizada a geração de código

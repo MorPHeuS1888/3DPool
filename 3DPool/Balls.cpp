@@ -105,7 +105,7 @@ namespace PoolLibrary {
 
                 // Carregar textura com flip correto
                 stbi_set_flip_vertically_on_load(false); // Já corrigimos nas UVs
-                break;
+     
             }
         }
     }
@@ -132,11 +132,10 @@ namespace PoolLibrary {
             int width, height, nrChannels;
             stbi_set_flip_vertically_on_load(true);
             unsigned char* data = stbi_load(modelData.texturePath.c_str(), &width, &height, &nrChannels, 0);
-            if (data) { 
-                    GLenum format = (nrChannels == 4) ? GL_RGBA : GL_RGB;
-                    glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
-                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 16);
-                    glGenerateMipmap(GL_TEXTURE_2D); // Geração de mipmaps       
+            if (data) {
+                GLenum format = (nrChannels == 4) ? GL_RGBA : GL_RGB;
+                glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+                glGenerateMipmap(GL_TEXTURE_2D);
             }
             else {
                 std::cerr << "Falha ao carregar textura: " << modelData.texturePath << std::endl;

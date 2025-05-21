@@ -7,7 +7,7 @@ out vec4 FragColor;
 
 uniform sampler2D texture_diffuse;
 uniform vec3 viewPos;
-uniform int useTexture;
+uniform bool useTexture;
 
 // Light structs
 struct DirectionalLight {
@@ -49,7 +49,7 @@ uniform SpotLight spotLight;
 
 void main() {
     vec4 color;
-    if (useTexture == 1) {
+    if (useTexture) { 
         color = texture(texture_diffuse, TexCoord);
     } else {
         color = vec4(0.0, 0.6, 0.0, 1.0); // Verde para a mesa

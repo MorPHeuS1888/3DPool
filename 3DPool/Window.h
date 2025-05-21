@@ -22,6 +22,11 @@ private:
     int width, height;
     Light light;
 
+    float rotationX, rotationY;
+    float zoom;
+    bool isMouseDragging;
+    double lastMouseX, lastMouseY;
+
     // Callbacks estáticos
     static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
     static void mouseCallback(GLFWwindow* window, double xpos, double ypos);

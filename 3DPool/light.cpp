@@ -64,8 +64,14 @@ void Light::update(GLuint shaderProgram, const glm::vec3& viewPos) {
     // Spot light (flashlight)
     glUniform1i(glGetUniformLocation(shaderProgram, "spotEnabled"), spotEnabled);
     if (spotEnabled) {
+        // Posição da luz = posição da câmera
         glUniform3fv(glGetUniformLocation(shaderProgram, "spotLight.position"), 1, glm::value_ptr(viewPos));
-        glUniform3fv(glGetUniformLocation(shaderProgram, "spotLight.direction"), 1, glm::value_ptr(spot.direction));
+
+        // Direção fixa para frente (eixo -Z, ajuste conforme a orientação da câmera)
+        glm::vec3 spotDirection = glm::vec3(0.0f, 0.0f, -1.0f); // Ajuste o Y para apontar para a mesa
+        glUniform3fv(glGetUniformLocation(shaderProgram, "spotLight.direction"), 1, glm::value_ptr(spotDirection));
+
+        // Parâmetros da luz
         glUniform3fv(glGetUniformLocation(shaderProgram, "spotLight.color"), 1, glm::value_ptr(spot.color));
         glUniform1f(glGetUniformLocation(shaderProgram, "spotLight.cutOff"), spot.cutOff);
         glUniform1f(glGetUniformLocation(shaderProgram, "spotLight.outerCutOff"), spot.outerCutOff);
