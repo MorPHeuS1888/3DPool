@@ -51,7 +51,9 @@ void main() {
     vec4 color;
     if (useTexture) { 
         color = texture(texture_diffuse, TexCoord);
-    } 
+    } else {
+        color = vec4(0.0, 0.6, 0.0, 1.0); // Verde para a mesa
+    }
 
     vec3 lighting = vec3(0.0);
     vec3 norm = normalize(Normal);
