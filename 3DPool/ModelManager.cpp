@@ -161,6 +161,23 @@ namespace PoolLibrary {
     }
 
     void ModelManager::Render(const glm::vec3& position, const glm::vec3& orientation) {
+        // Calcular matriz de modelo
+        glm::mat4 modelMatrix = glm::mat4(1.0f);
+        modelMatrix = glm::translate(modelMatrix, position);
+        modelMatrix = glm::rotate(modelMatrix, orientation.x, glm::vec3(1.0f, 0.0f, 0.0f));
+        modelMatrix = glm::rotate(modelMatrix, orientation.y, glm::vec3(0.0f, 1.0f, 0.0f));
+        modelMatrix = glm::rotate(modelMatrix, orientation.z, glm::vec3(0.0f, 0.0f, 1.0f));
+        modelMatrix = glm::scale(modelMatrix, modelData.scale);
+
+        // Enviar matriz para o shader atual
+        GLint currentProgram;
+        glGetIntegerv(GL_CURRENT_PROGRAM, &currentProgram);
+        if (currentProgram != 0) {
+            GLuint modelLoc = glGetUniformLocation(currentProgram, "model");
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+        }
+
+        // Renderizar
         glBindVertexArray(modelData.VAO);
         if (modelData.textureID != 0) {
             glActiveTexture(GL_TEXTURE0);

@@ -1,20 +1,19 @@
 #pragma once
-#include "Renderable.h"
 #include <vector>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include "light.h"
 #include <string> 
-#include "ModelManager.h" // Adicionar este include para ModelManager
+#include "ModelManager.h" 
 
 
-class Balls : public Renderable {
+class Balls : public PoolLibrary :: Renderable {
 public:
     Balls();
     ~Balls();
 
     void setup();
-    void render(const glm::mat4& view, const glm::mat4& projection,
+    void applySceneContext(const glm::mat4& view, const glm::mat4& projection,
         const glm::vec3& lightPos, const glm::vec3& viewPos,
         const glm::vec3& lightColor, bool useLighting) override;
     GLuint getShaderProgram() const override { return shaderProgram; }

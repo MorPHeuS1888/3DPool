@@ -86,35 +86,26 @@ void Balls::setup() {
     }
 }
 
-void Balls::render(const glm::mat4& view, const glm::mat4& projection,
+
+void Balls::applySceneContext(const glm::mat4& view, const glm::mat4& projection,
     const glm::vec3& lightPos, const glm::vec3& viewPos,
     const glm::vec3& lightColor, bool useLighting) {
     glUseProgram(shaderProgram);
 
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+
     glUniform3fv(glGetUniformLocation(shaderProgram, "lightPos"), 1, glm::value_ptr(lightPos));
     glUniform3fv(glGetUniformLocation(shaderProgram, "viewPos"), 1, glm::value_ptr(viewPos));
     glUniform3fv(glGetUniformLocation(shaderProgram, "lightColor"), 1, glm::value_ptr(lightColor));
+
+
     glUniform1i(glGetUniformLocation(shaderProgram, "useLighting"), useLighting ? 1 : 0);
     glUniform1i(glGetUniformLocation(shaderProgram, "useTexture"), 1);
 
     for (auto& ball : balls) {
-        glEnable(GL_POLYGON_OFFSET_FILL);
-        glPolygonOffset(1.0f, 2.0f);
-
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, ball.position);
-
-        // Aplicar rotações
-        model = glm::rotate(model, ball.rotation.x, glm::vec3(1.0f, 0.0f, 0.0f)); // X fixo
-        model = glm::rotate(model, ball.rotation.y, glm::vec3(0.0f, 1.0f, 0.0f)); // Y aleatório
-        model = glm::rotate(model, ball.rotation.z, glm::vec3(0.0f, 0.0f, 1.0f)); // Z aleatório
-        model = glm::scale(model, glm::vec3(0.05f));
-
-        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
-
-        ball.model.Render(ball.position, glm::vec3(0.0f));
+        ball.model.SetScale(glm::vec3(0.05f));
+        ball.model.Render(ball.position, ball.rotation);
         glDisable(GL_POLYGON_OFFSET_FILL);
     }
 }

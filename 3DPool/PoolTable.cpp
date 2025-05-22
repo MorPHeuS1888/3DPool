@@ -83,7 +83,7 @@ void PoolTable::setup() {
     glUniform1i(glGetUniformLocation(shaderProgram, "useTexture"), 0);
 }
 
-void PoolTable::render(const glm::mat4& view, const glm::mat4& projection,
+void PoolTable::applySceneContext(const glm::mat4& view, const glm::mat4& projection,
     const glm::vec3& lightPos, const glm::vec3& viewPos,
     const glm::vec3& lightColor, bool useLighting) {
     glUseProgram(shaderProgram);

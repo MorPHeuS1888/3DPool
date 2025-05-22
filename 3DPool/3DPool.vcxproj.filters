@@ -47,9 +47,6 @@
     <ClInclude Include="PoolTable.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Renderable.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderUtils.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>

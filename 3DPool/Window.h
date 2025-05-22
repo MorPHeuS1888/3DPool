@@ -2,10 +2,10 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "Renderable.h"
 #include "Camera.h"
 #include "Light.h"
 #include <iostream>
+#include "ModelManager.h"
 
 class Window {
 public:
@@ -13,7 +13,7 @@ public:
     ~Window();
 
     void processInput();
-    void update(Renderable* scene);
+    void update(PoolLibrary::Renderable* scene);
     bool shouldClose() const;
     GLFWwindow* getWindow() const;
 

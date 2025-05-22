@@ -77,7 +77,7 @@ void Window::processInput() {
     glfwPollEvents();
 }
 
-void Window::update(Renderable* scene) {
+void Window::update(PoolLibrary::Renderable* scene) {
     // Atualiza matriz de projeção com novo aspect ratio
     glm::mat4 projection = glm::perspective(
         glm::radians(70.0f),
@@ -109,7 +109,7 @@ void Window::update(Renderable* scene) {
     // Renderização principal
     glViewport(0, 0, width, height);
     if (scene) {
-        scene->render(view, projection, lightPos, camera.getPosition(), lightColor, true);
+        scene->applySceneContext(view, projection, lightPos, camera.getPosition(), lightColor, true);
     }
 
 
@@ -146,7 +146,7 @@ void Window::update(Renderable* scene) {
             1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)) // Matriz identidade
         );
 
-        scene->render(miniMapView, miniMapProjection, lightPos, camera.getPosition(), lightColor, true);
+        scene->applySceneContext(miniMapView, miniMapProjection, lightPos, camera.getPosition(), lightColor, true);
     }
 
     // Restaura viewport principal

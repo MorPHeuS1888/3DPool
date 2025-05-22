@@ -151,7 +151,6 @@
     <ClInclude Include="light.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="PoolTable.h" />
-    <ClInclude Include="Renderable.h" />
     <ClInclude Include="ShaderUtils.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

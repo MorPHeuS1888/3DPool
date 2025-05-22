@@ -1,18 +1,14 @@
-﻿LINK : warning LNK4098: defaultlib 'MSVCRT' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp_glBindTexture, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
+﻿  Window.cpp
+C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\ModelManager.h(27,53): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
+  (compilando o arquivo fonte 'Window.cpp')
+  
+C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Window.cpp(211,54): warning C4244: '+=': conversão de 'double' para 'float', possível perda de dados
+C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Window.cpp(212,54): warning C4244: '+=': conversão de 'double' para 'float', possível perda de dados
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
 Balls.obj : error LNK2019: símbolo externo não resolvido, __imp_glDisable, referenciado na função "public: virtual void __cdecl Balls::render(struct glm::mat<4,4,float,0> const &,struct glm::mat<4,4,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,bool)" (?render@Balls@@UEAAXAEBU?$mat@$03$03M$0A@@glm@@0AEBU?$vec@$02M$0A@@3@11_N@Z)
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp_glDrawArrays, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Render(struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &)" (?Render@ModelManager@PoolLibrary@@QEAAXAEBU?$vec@$02M$0A@@glm@@0@Z)
 Balls.obj : error LNK2019: símbolo externo não resolvido, __imp_glEnable, referenciado na função "public: virtual void __cdecl Balls::render(struct glm::mat<4,4,float,0> const &,struct glm::mat<4,4,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,bool)" (?render@Balls@@UEAAXAEBU?$mat@$03$03M$0A@@glm@@0AEBU?$vec@$02M$0A@@3@11_N@Z)
 Window.obj : error LNK2001: símbolo externo não resolvido __imp_glEnable
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp_glGenTextures, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
 Balls.obj : error LNK2019: símbolo externo não resolvido, __imp_glPolygonOffset, referenciado na função "public: virtual void __cdecl Balls::render(struct glm::mat<4,4,float,0> const &,struct glm::mat<4,4,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,bool)" (?render@Balls@@UEAAXAEBU?$mat@$03$03M$0A@@glm@@0AEBU?$vec@$02M$0A@@3@11_N@Z)
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp_glTexImage2D, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp_glTexParameteri, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewActiveTexture, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Render(struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &)" (?Render@ModelManager@PoolLibrary@@QEAAXAEBU?$vec@$02M$0A@@glm@@0@Z)
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewBindBuffer, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::BindShaderAttributes(unsigned int)" (?BindShaderAttributes@ModelManager@PoolLibrary@@QEAAXI@Z)
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewBufferData, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewGenBuffers, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewEnableVertexAttribArray, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::BindShaderAttributes(unsigned int)" (?BindShaderAttributes@ModelManager@PoolLibrary@@QEAAXI@Z)
 Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewGetUniformLocation, referenciado na função "public: virtual void __cdecl Balls::render(struct glm::mat<4,4,float,0> const &,struct glm::mat<4,4,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,bool)" (?render@Balls@@UEAAXAEBU?$mat@$03$03M$0A@@glm@@0AEBU?$vec@$02M$0A@@3@11_N@Z)
 light.obj : error LNK2001: símbolo externo não resolvido __imp___glewGetUniformLocation
 Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewUniform1i, referenciado na função "public: virtual void __cdecl Balls::render(struct glm::mat<4,4,float,0> const &,struct glm::mat<4,4,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,bool)" (?render@Balls@@UEAAXAEBU?$mat@$03$03M$0A@@glm@@0AEBU?$vec@$02M$0A@@3@11_N@Z)
@@ -22,13 +18,23 @@ light.obj : error LNK2001: símbolo externo não resolvido __imp___glewUniform3f
 Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewUniformMatrix4fv, referenciado na função "public: virtual void __cdecl Balls::render(struct glm::mat<4,4,float,0> const &,struct glm::mat<4,4,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,bool)" (?render@Balls@@UEAAXAEBU?$mat@$03$03M$0A@@glm@@0AEBU?$vec@$02M$0A@@3@11_N@Z)
 Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewUseProgram, referenciado na função "public: virtual void __cdecl Balls::render(struct glm::mat<4,4,float,0> const &,struct glm::mat<4,4,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,bool)" (?render@Balls@@UEAAXAEBU?$mat@$03$03M$0A@@glm@@0AEBU?$vec@$02M$0A@@3@11_N@Z)
 light.obj : error LNK2001: símbolo externo não resolvido __imp___glewUseProgram
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewVertexAttribPointer, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::BindShaderAttributes(unsigned int)" (?BindShaderAttributes@ModelManager@PoolLibrary@@QEAAXI@Z)
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewGenerateMipmap, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewBindVertexArray, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::BindShaderAttributes(unsigned int)" (?BindShaderAttributes@ModelManager@PoolLibrary@@QEAAXI@Z)
-Balls.obj : error LNK2019: símbolo externo não resolvido, __imp___glewGenVertexArrays, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
 light.obj : error LNK2019: símbolo externo não resolvido, __imp___glewUniform1f, referenciado na função "public: void __cdecl Light::update(unsigned int,struct glm::vec<3,float,0> const &)" (?update@Light@@QEAAXIAEBU?$vec@$02M$0A@@glm@@@Z)
 light.obj : error LNK2019: símbolo externo não resolvido, __imp___glewUniform3f, referenciado na função "public: void __cdecl Light::update(unsigned int,struct glm::vec<3,float,0> const &)" (?update@Light@@QEAAXIAEBU?$vec@$02M$0A@@glm@@@Z)
 main.obj : error LNK2019: símbolo externo não resolvido, __imp_glClear, referenciado na função main
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp_glBindTexture, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp_glDrawArrays, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Render(struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &)" (?Render@ModelManager@PoolLibrary@@QEAAXAEBU?$vec@$02M$0A@@glm@@0@Z)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp_glGenTextures, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp_glTexImage2D, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp_glTexParameteri, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp___glewActiveTexture, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Render(struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &)" (?Render@ModelManager@PoolLibrary@@QEAAXAEBU?$vec@$02M$0A@@glm@@0@Z)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp___glewBindBuffer, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::BindShaderAttributes(unsigned int)" (?BindShaderAttributes@ModelManager@PoolLibrary@@QEAAXI@Z)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp___glewBufferData, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp___glewGenBuffers, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp___glewEnableVertexAttribArray, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::BindShaderAttributes(unsigned int)" (?BindShaderAttributes@ModelManager@PoolLibrary@@QEAAXI@Z)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp___glewVertexAttribPointer, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::BindShaderAttributes(unsigned int)" (?BindShaderAttributes@ModelManager@PoolLibrary@@QEAAXI@Z)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp___glewGenerateMipmap, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp___glewBindVertexArray, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::BindShaderAttributes(unsigned int)" (?BindShaderAttributes@ModelManager@PoolLibrary@@QEAAXI@Z)
+ModelManager.obj : error LNK2019: símbolo externo não resolvido, __imp___glewGenVertexArrays, referenciado na função "public: void __cdecl PoolLibrary::ModelManager::Install(void)" (?Install@ModelManager@PoolLibrary@@QEAAXXZ)
 PoolTable.obj : error LNK2001: símbolo externo não resolvido __glewGetUniformLocation
 Window.obj : error LNK2001: símbolo externo não resolvido __glewGetUniformLocation
 PoolTable.obj : error LNK2001: símbolo externo não resolvido __glewUniform1i
@@ -37,6 +43,7 @@ PoolTable.obj : error LNK2001: símbolo externo não resolvido __glewUniform3f
 Window.obj : error LNK2001: símbolo externo não resolvido __glewUniform3f
 PoolTable.obj : error LNK2001: símbolo externo não resolvido __glewUniform3fv
 PoolTable.obj : error LNK2001: símbolo externo não resolvido __glewUniformMatrix4fv
+Window.obj : error LNK2001: símbolo externo não resolvido __glewUniformMatrix4fv
 PoolTable.obj : error LNK2001: símbolo externo não resolvido __glewUseProgram
 Window.obj : error LNK2001: símbolo externo não resolvido __glewUseProgram
 ShaderUtils.obj : error LNK2001: símbolo externo não resolvido __glewAttachShader
