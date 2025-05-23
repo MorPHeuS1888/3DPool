@@ -11,7 +11,7 @@ uniform mat4 projection;
 
 out vec3 FragPos;
 out vec3 Normal;
-out vec2 TexCoord; // Nome corrigido (sem 's' no final)
+out vec2 TexCoord; 
 
 void main() {
     mat4 finalModel = globalModel * model; 

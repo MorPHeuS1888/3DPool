@@ -6,6 +6,9 @@
 #include "Light.h"
 #include <iostream>
 #include "ModelManager.h"
+#include "Animation.h"
+#include "PoolTable.h"
+#include "Balls.h"
 
 class Window {
 public:
@@ -13,7 +16,8 @@ public:
     ~Window();
 
     void processInput();
-    void update(PoolLibrary::Renderable* scene);
+    void update(PoolLibrary::Renderable* scene, float deltaTime);
+    void updateSceneContext(float deltaTime);
     bool shouldClose() const;
     GLFWwindow* getWindow() const;
 
@@ -21,7 +25,9 @@ private:
     GLFWwindow* window;
     int width, height;
     Light light;
-
+    PoolTable poolTable;  // Declarado primeiro
+    Balls balls;          // Declarado depois
+    Animation animation;  // Depende dos anteriores
     float rotationX, rotationY;
     float zoom;
     bool isMouseDragging;
@@ -33,6 +39,7 @@ private:
     static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
     static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
     static void framebufferSizeCallback(GLFWwindow* window, int width, int height); // Adicione esta linha
+   
 
     Camera camera;
 };

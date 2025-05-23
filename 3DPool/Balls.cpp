@@ -20,6 +20,9 @@ Balls::~Balls() {
 }
 
 void Balls::setup() {
+    ballPositions.resize(15);
+    ballVelocities.resize(15, glm::vec3(0.0f));
+
     ShaderInfo shaders[] = {
         { GL_VERTEX_SHADER, "shaders/vertexShader.ver" },
         { GL_FRAGMENT_SHADER, "shaders/fragmentShader.frag" },
@@ -32,7 +35,7 @@ void Balls::setup() {
         return;
     }
 
-    std::srand(12345);
+   std::srand(static_cast<unsigned int>(time(nullptr)));
 
     const float tableMinX = -0.7f;
     const float tableMaxX = 0.7f;
@@ -74,17 +77,52 @@ void Balls::setup() {
             ball.model.BindShaderAttributes(shaderProgram);
             ball.position = positions[index];
 
-            // Rotação fixa de 180° no X para correção + rotações aleatórias
-            ball.rotation = glm::vec3(
-                glm::radians(180.0f), // Fixa no X para orientação correta
-                glm::radians(static_cast<float>(rand() % 360)), // Aleatório Y
-                glm::radians(static_cast<float>(rand() % 360))  // Aleatório Z
+            // Rotação inicial fixa (pode ser aleatória)
+            ball.initialRotation = glm::vec3(
+                glm::radians(180.0f),
+                glm::radians(static_cast<float>(rand() % 360)),
+                glm::radians(static_cast<float>(rand() % 360))
             );
+
+            // Inicializa rotações
+            ball.movementRotation = glm::vec3(0.0f);
+            ball.rotation = ball.initialRotation;
 
             balls.push_back(ball);
         }
     }
+
+
 }
+
+void Balls::SetBallPosition(int index, const glm::vec3& pos) {
+    if (index >= 0 && index < balls.size()) {
+        balls[index].position = pos; // Atualiza a posição de renderização
+        balls[index].model.SetScale(glm::vec3(0.05f)); // Garante que a escala está correta
+    }
+}
+
+glm::vec3 Balls::GetBallPosition(int index) const {
+    if (index >= 0 && index < balls.size()) {
+        return balls[index].position;
+    }
+    return glm::vec3(0.0f);
+}
+
+glm::vec3 Balls::GetBallRotation(int index) const {
+    if (index >= 0 && index < balls.size()) {
+        return balls[index].rotation;
+    }
+    return glm::vec3(0.0f);
+}
+
+void Balls::SetBallRotation(int index, const glm::vec3& rotation) {
+    if (index >= 0 && index < balls.size()) {
+        balls[index].rotation = rotation;
+    }
+}
+
+
 
 
 void Balls::applySceneContext(const glm::mat4& view, const glm::mat4& projection,

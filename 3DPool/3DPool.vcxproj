@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Balls.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="light.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Balls.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="light.h" />

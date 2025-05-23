@@ -7,11 +7,10 @@
 #include <iostream>
 #include <glm/gtc/type_ptr.hpp>
 #include "Balls.h"
+#include "Animation.h"
 
-Window::Window(int width, int height, const char* title) :
-    width(width), height(height),
-    rotationX(0.0f), rotationY(0.0f), zoom(-3.0f),
-    isMouseDragging(false), lastMouseX(0), lastMouseY(0) {
+
+Window::Window(int width, int height, const char* title) : width(width), height(height), rotationX(0.0f), rotationY(0.0f), zoom(-3.0f), isMouseDragging(false), lastMouseX(0), lastMouseY(0), animation(balls, poolTable) {
     if (!glfwInit()) {
         std::cerr << "Falha ao inicializar o GLFW" << std::endl;
         exit(-1);
@@ -54,6 +53,9 @@ Window::Window(int width, int height, const char* title) :
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+    poolTable.setup();
+    balls.setup();
 }
 
 Window::~Window() {
@@ -77,7 +79,11 @@ void Window::processInput() {
     glfwPollEvents();
 }
 
-void Window::update(PoolLibrary::Renderable* scene) {
+
+
+void Window::update(PoolLibrary::Renderable* scene, float deltaTime) {
+    animation.Update(deltaTime);
+
     // Atualiza matriz de projeção com novo aspect ratio
     glm::mat4 projection = glm::perspective(
         glm::radians(70.0f),
@@ -138,7 +144,7 @@ void Window::update(PoolLibrary::Renderable* scene) {
         glUniform1i(glGetUniformLocation(shader, "directionalEnabled"), 0);
         glUniform1i(glGetUniformLocation(shader, "pointEnabled"), 0);
         glUniform1i(glGetUniformLocation(shader, "spotEnabled"), 0);
-        glUniform3f(glGetUniformLocation(shader, "ambientLight"), 0.8f, 0.8f, 0.8f);
+        glUniform3f(glGetUniformLocation(shader, "ambientLight"), 1.0f, 1.0f, 1.0f);
 
         // Renderize sem aplicar transformações globais (globalModel)
         glUniformMatrix4fv(
@@ -153,14 +159,19 @@ void Window::update(PoolLibrary::Renderable* scene) {
     glViewport(0, 0, width, height);
 }
 
+void Window::updateSceneContext(float deltaTime) {
+    animation.Update(deltaTime);
+
+    // Atualizar e renderizar a mesa
+    update(&poolTable, deltaTime);
+    // Atualizar e renderizar as bolas
+    update(&balls, deltaTime);
+}
+
+
 // Outros callbacks mantidos iguais
 void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     Window* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
-
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-        std::cout << "ESC key pressed - closing window" << std::endl;
-        glfwSetWindowShouldClose(window, true);
-    }
 
     if (action == GLFW_PRESS) {
         std::cout << "Key PRESSED: ";
@@ -184,6 +195,19 @@ void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, 
             self->light.toggleSpot();
             std::cout << "4 (Spot light) - Estado: "
                 << (self->light.isSpotEnabled() ? "ON" : "OFF");
+            break;
+        case GLFW_KEY_ESCAPE:
+            std::cout << "ESC key pressed - closing window" << std::endl;
+            glfwSetWindowShouldClose(window, true);
+            break;
+        case GLFW_KEY_SPACE:
+            if (!self->animation.IsAnimating()) {
+                std::cout << "\n--- STARTING NEW ANIMATION ---\n";
+                self->animation.StartRandomAnimation();
+            }
+            else {
+                std::cout << "Animation already in progress!\n";
+            }
             break;
         default:
             std::cout << "Unknown key: " << key;
