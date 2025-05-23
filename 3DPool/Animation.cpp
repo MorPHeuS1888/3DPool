@@ -7,7 +7,7 @@
 
 
 Animation::Animation(Balls& balls, PoolTable& table)
-    : m_balls(balls), m_table(table) {
+    : m_balls(balls), m_table(table), m_totalRotationAngle(0.0f) {
     std::cout << "Animation System Initialized\n";
 }
 
@@ -18,28 +18,24 @@ void Animation::Update(float deltaTime) {
     glm::vec3 newPos = currentPos + (m_currentVelocity * deltaTime);
 
 
-        // 1. Normalizar direção do movimento
-        glm::vec3 moveDir = glm::normalize(m_currentVelocity);
+    // Calcular distância e ângulo de rotação
+    float distance = glm::length(m_currentVelocity) * deltaTime;
+    float circumference = 2.0f * glm::pi<float>() * 0.05f;
+    float deltaAngle = (distance / circumference) * 2.0f * glm::pi<float>();
+    m_totalRotationAngle += deltaAngle;
 
-        // 2. Calcular eixo de rotação (perpendicular ao movimento e ao eixo Y)
-        glm::vec3 rotationAxis = glm::normalize(glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), moveDir));
-
-        // 3. Calcular ângulo de rotação proporcional à distância percorrida
-        float distance = glm::length(m_currentVelocity) * deltaTime;
-        float circumference = 2.0f * glm::pi<float>() * 0.05f; // Circunferência da bola
-        float rotationAngle = (distance / circumference) * 2.0f * glm::pi<float>();
-
-        // 4. Atualizar rotação
-        glm::vec3 currentRot = m_balls.GetBallRotation(m_activeBall);
-        glm::vec3 newRot = currentRot + rotationAxis * rotationAngle;
-        m_balls.SetBallRotation(m_activeBall, newRot);
+    // Aplicar rotação no eixo pré-definido
+    glm::vec3 currentRot = m_balls.GetBallRotation(m_activeBall);
+    glm::vec3 rotationDelta = m_rotationAxis * deltaAngle;
+    glm::vec3 newRot = currentRot + rotationDelta;
+    m_balls.SetBallRotation(m_activeBall, newRot);
     
 
     // Debug: Mostrar movimento
     std::cout << "Ball " << m_activeBall
         << " | Velocity: (" << m_currentVelocity.x << ", " << m_currentVelocity.z << ")"
-        << " | Rotation Axis: (" << rotationAxis.x << ", " << rotationAxis.y << ", " << rotationAxis.z << ")"
-        << " | Rotation Angle: " << rotationAngle << " degrees\n";
+        << " | Rotation Axis: (" << m_rotationAxis.x << ", " << m_rotationAxis.y << ", " << m_rotationAxis.z << ")"
+        << " | Rotation Angle: " << glm::degrees(m_totalRotationAngle) << " degrees\n";
 
     if (CheckCollisions(newPos)) {
         std::cout << "Collision Detected! Stopping animation.\n";
@@ -63,6 +59,11 @@ void Animation::StartRandomAnimation() {
 
     m_activeBall = ballDist(gen);
     GenerateRandomDirection();
+
+    // Calcular eixo de rotação inicial
+    glm::vec3 moveDir = glm::normalize(m_currentVelocity);
+    m_rotationAxis = glm::normalize(glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), moveDir));
+    m_totalRotationAngle = 0.0f;
 
     std::cout << "Starting animation - Ball: " << m_activeBall
         << " | Direction: (" << m_currentVelocity.x << ", " << m_currentVelocity.z << ")\n";
@@ -117,7 +118,7 @@ void Animation::GenerateRandomDirection() {
     );
 
     // Define velocidade fixa (ex: 3.0 unidades/segundo)
-    m_currentVelocity *= 0.1f;
+    m_currentVelocity *= 0.3f;
 
     // Debug: Verifique valores
     std::cout << "Generated Direction: ("

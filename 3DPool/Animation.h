@@ -18,6 +18,8 @@ private:
     bool m_isAnimating = false;
     int m_activeBall = -1;
     glm::vec3 m_currentVelocity;
+    glm::vec3 m_rotationAxis;
+    float m_totalRotationAngle;
 
     bool CheckCollisions(const glm::vec3& newPosition);
     void GenerateRandomDirection();
