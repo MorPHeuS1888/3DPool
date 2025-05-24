@@ -73,7 +73,7 @@ void Balls::setup() {
             ball.model.BindShaderAttributes(shaderProgram);
             ball.position = positions[index];
 
-            // Rotação inicial fixa (pode ser aleatória)
+            // Rotação inicial 
             ball.initialRotation = glm::vec3(
                 glm::radians(180.0f),
                 glm::radians(static_cast<float>(rand() % 360)),
@@ -91,13 +91,15 @@ void Balls::setup() {
 
 }
 
+//atualiza a posição de uma bola específica
 void Balls::SetBallPosition(int index, const glm::vec3& pos) {
     if (index >= 0 && index < balls.size()) {
         balls[index].position = pos; // Atualiza a posição de renderização
-        balls[index].model.SetScale(glm::vec3(0.05f)); // Garante que a escala está correta pos ela é alterada 
+        balls[index].model.SetScale(glm::vec3(0.05f)); 
     }
 }
 
+//retorna a posição de uma bola específica
 glm::vec3 Balls::GetBallPosition(int index) const {
     if (index >= 0 && index < balls.size()) {
         return balls[index].position;
@@ -105,6 +107,7 @@ glm::vec3 Balls::GetBallPosition(int index) const {
     return glm::vec3(0.0f);
 }
 
+//retorna a rotação de uma bola específica
 glm::vec3 Balls::GetBallRotation(int index) const {
     if (index >= 0 && index < balls.size()) {
         return balls[index].rotation;
@@ -112,6 +115,7 @@ glm::vec3 Balls::GetBallRotation(int index) const {
     return glm::vec3(0.0f);
 }
 
+//define a rotação de uma bola específica
 void Balls::SetBallRotation(int index, const glm::vec3& rotation) {
     if (index >= 0 && index < balls.size()) {
         balls[index].rotation = rotation;

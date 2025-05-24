@@ -7,7 +7,7 @@ Light::Light() :
     pointEnabled(false),
     spotEnabled(false)
 {
-    // Initialize light parameters
+    // Incializa as propriedades das luzes
     directional.direction = glm::vec3(-0.2f, -1.0f, -0.3f);
     directional.color = glm::vec3(0.8f, 0.8f, 0.8f);
 
@@ -30,7 +30,7 @@ Light::Light() :
 void Light::setup(GLuint shaderProgram) {
     glUseProgram(shaderProgram);
     
-    // Set initial light states
+    // Definições iniciais das luzes
     glUniform1i(glGetUniformLocation(shaderProgram, "ambientEnabled"), ambientEnabled);
     glUniform1i(glGetUniformLocation(shaderProgram, "directionalEnabled"), directionalEnabled);
     glUniform1i(glGetUniformLocation(shaderProgram, "pointEnabled"), pointEnabled);
@@ -40,18 +40,18 @@ void Light::setup(GLuint shaderProgram) {
 void Light::update(GLuint shaderProgram, const glm::vec3& viewPos) {
     glUseProgram(shaderProgram);
 
-    // Ambient light
+    // Luz ambiente
     glUniform1i(glGetUniformLocation(shaderProgram, "ambientEnabled"), ambientEnabled);
     glUniform3f(glGetUniformLocation(shaderProgram, "ambientLight"), 0.8f, 0.8f, 0.8f);
 
-    // Directional light
+    // Luz direcional
     glUniform1i(glGetUniformLocation(shaderProgram, "directionalEnabled"), directionalEnabled);
     if (directionalEnabled) {
         glUniform3fv(glGetUniformLocation(shaderProgram, "directionalLight.direction"), 1, glm::value_ptr(directional.direction));
         glUniform3fv(glGetUniformLocation(shaderProgram, "directionalLight.color"), 1, glm::value_ptr(directional.color));
     }
 
-    // Point light
+    // Luz pontual
     glUniform1i(glGetUniformLocation(shaderProgram, "pointEnabled"), pointEnabled);
     if (pointEnabled) {
         glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight.position"), 1, glm::value_ptr(point.position));
@@ -61,7 +61,7 @@ void Light::update(GLuint shaderProgram, const glm::vec3& viewPos) {
         glUniform1f(glGetUniformLocation(shaderProgram, "pointLight.quadratic"), point.quadratic);
     }
 
-    // Spot light (flashlight)
+    // Luz cónica 
     glUniform1i(glGetUniformLocation(shaderProgram, "spotEnabled"), spotEnabled);
     if (spotEnabled) {
         // Posição da luz = posição da câmera
