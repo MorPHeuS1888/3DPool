@@ -32,7 +32,7 @@ void Animation::Update(float deltaTime) {
     
 
     // Debug: Mostrar movimento
-    std::cout << "Ball " << m_activeBall
+    std::cout << "Ball " << (m_activeBall + 1)
         << " | Velocity: (" << m_currentVelocity.x << ", " << m_currentVelocity.z << ")"
         << " | Rotation Axis: (" << m_rotationAxis.x << ", " << m_rotationAxis.y << ", " << m_rotationAxis.z << ")"
         << " | Rotation Angle: " << glm::degrees(m_totalRotationAngle) << " degrees\n";

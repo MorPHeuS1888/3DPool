@@ -104,9 +104,14 @@ void Window::update(PoolLibrary::Renderable* scene, float deltaTime) {
     glm::vec3 lightPos(1.0f, 2.0f, 2.0f);
     glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
-    // 1. Primeiro renderiza o skybox (sem transformações globais)
+    // 1. Renderiza o skybox com apenas a rotação (sem translação)
     glDepthMask(GL_FALSE); // Desativa escrita no depth buffer
-    background.applySceneContext(view, projection, lightPos, camera.getPosition(), lightColor, true);
+
+    // Cria uma matriz de view apenas com rotação para o skybox
+    glm::mat4 skyboxView = glm::mat4(glm::mat3(view)); // Remove translação
+    skyboxView = glm::rotate(skyboxView, rotationY, glm::vec3(0.0f, 1.0f, 0.0f)); // Aplica rotação Y
+
+    background.applySceneContext(skyboxView, projection, lightPos, camera.getPosition(), lightColor, true);
     glDepthMask(GL_TRUE); // Reativa para outros objetos
 
     // 2. Depois renderiza a cena com transformações globais
@@ -262,7 +267,7 @@ void Window::mouseButtonCallback(GLFWwindow* window, int button, int action, int
 void Window::scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
     Window* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
     self->zoom += static_cast<float>(yoffset) * 0.2f;
-    self->zoom = glm::clamp(self->zoom, -10.0f, -1.0f);
+    self->zoom = glm::clamp(self->zoom, -10.0f, -0.05f);
 }
 
 GLFWwindow* Window::getWindow() const {
