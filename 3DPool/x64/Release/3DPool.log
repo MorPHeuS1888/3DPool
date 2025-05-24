@@ -1,25 +1,28 @@
-﻿  Animation.cpp
+﻿  Window.cpp
 C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\ModelManager.h(28,53): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
-  (compilando o arquivo fonte 'Animation.cpp')
+  (compilando o arquivo fonte 'Window.cpp')
   
+C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Window.cpp(247,54): warning C4244: '+=': conversão de 'double' para 'float', possível perda de dados
+C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Window.cpp(248,54): warning C4244: '+=': conversão de 'double' para 'float', possível perda de dados
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
   Gerando código
-  1 of 812 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 870 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    8 functions had inline decision re-evaluated but remain unchanged
+    7 functions had inline decision re-evaluated but remain unchanged
   Finalizada a geração de código
 glew32s.lib(glew.obj) : warning LNK4099: PDB '' não foi encontrado 'glew32s.lib(glew.obj)' ou no ''; vinculando objeto quando quando sem nenhuma informação de depuração
+LINK : warning LNK4286: o símbolo '__glewUniformMatrix4fv' definido em 'glew32s.lib(glew.obj)' é importado por 'background.obj'
+LINK : warning LNK4286: o símbolo '__glewDeleteProgram' definido em 'glew32s.lib(glew.obj)' é importado por 'background.obj'
+LINK : warning LNK4286: o símbolo '__glewActiveTexture' definido em 'glew32s.lib(glew.obj)' é importado por 'background.obj'
+LINK : warning LNK4286: o símbolo '__glewGetUniformLocation' definido em 'glew32s.lib(glew.obj)' é importado por 'background.obj'
+LINK : warning LNK4286: o símbolo '__glewUniform1i' definido em 'glew32s.lib(glew.obj)' é importado por 'background.obj'
+LINK : warning LNK4286: o símbolo '__glewUseProgram' definido em 'glew32s.lib(glew.obj)' é importado por 'background.obj'
 LINK : warning LNK4286: o símbolo '__glewUniform3fv' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
-LINK : warning LNK4286: o símbolo '__glewUniformMatrix4fv' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
-LINK : warning LNK4286: o símbolo '__glewGetUniformLocation' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
-LINK : warning LNK4286: o símbolo '__glewUniform1i' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
-LINK : warning LNK4286: o símbolo '__glewUseProgram' definido em 'glew32s.lib(glew.obj)' é importado por 'Balls.obj'
 LINK : warning LNK4286: o símbolo '__glewUniform3f' definido em 'glew32s.lib(glew.obj)' é importado por 'light.obj'
 LINK : warning LNK4286: o símbolo '__glewUniform1f' definido em 'glew32s.lib(glew.obj)' é importado por 'light.obj'
 LINK : warning LNK4286: o símbolo '__glewGenerateMipmap' definido em 'glew32s.lib(glew.obj)' é importado por 'ModelManager.obj'
 LINK : warning LNK4286: o símbolo '__glewGenBuffers' definido em 'glew32s.lib(glew.obj)' é importado por 'ModelManager.obj'
 LINK : warning LNK4286: o símbolo '__glewGenVertexArrays' definido em 'glew32s.lib(glew.obj)' é importado por 'ModelManager.obj'
-LINK : warning LNK4286: o símbolo '__glewActiveTexture' definido em 'glew32s.lib(glew.obj)' é importado por 'ModelManager.obj'
 LINK : warning LNK4286: o símbolo '__glewBufferData' definido em 'glew32s.lib(glew.obj)' é importado por 'ModelManager.obj'
 LINK : warning LNK4286: o símbolo '__glewBindBuffer' definido em 'glew32s.lib(glew.obj)' é importado por 'ModelManager.obj'
 LINK : warning LNK4286: o símbolo '__glewVertexAttribPointer' definido em 'glew32s.lib(glew.obj)' é importado por 'ModelManager.obj'

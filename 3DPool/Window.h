@@ -9,6 +9,7 @@
 #include "Animation.h"
 #include "PoolTable.h"
 #include "Balls.h"
+#include "Background.h"
 
 class Window {
 public:
@@ -25,6 +26,7 @@ private:
     GLFWwindow* window;
     int width, height;
     Light light;
+    Background background;
     PoolTable poolTable;  // Declarado primeiro
     Balls balls;          // Declarado depois
     Animation animation;  // Depende dos anteriores

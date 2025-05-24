@@ -2,14 +2,17 @@
 in vec3 FragPos;
 in vec3 Normal;
 in vec2 TexCoord;
+in vec3 SkyboxTexCoord;
 
 out vec4 FragColor;
 
 uniform sampler2D texture_diffuse;
 uniform vec3 viewPos;
 uniform bool useTexture;
+uniform samplerCube skybox;
+uniform bool useSkybox;
 
-// Light structs
+// Light structs (mantidas como original)
 struct DirectionalLight {
     vec3 direction;
     vec3 color;
@@ -34,7 +37,7 @@ struct SpotLight {
     float quadratic;
 };
 
-// Light uniforms
+// Light uniforms (mantidas como original)
 uniform bool ambientEnabled;
 uniform vec3 ambientLight;
 
@@ -48,6 +51,14 @@ uniform bool spotEnabled;
 uniform SpotLight spotLight;
 
 void main() {
+    // Primeiro verifica se é skybox (sem afetar outros objetos)
+    if (useSkybox) {
+        vec3 texCoord = normalize(FragPos - viewPos);
+    FragColor = texture(skybox, texCoord);
+    return;
+    }
+
+    // Lógica original para outros objetos
     vec4 color;
     if (useTexture) { 
         color = texture(texture_diffuse, TexCoord);
@@ -106,6 +117,6 @@ void main() {
         lighting += diffuse * color.rgb;
     }
 
-   vec3 result = lighting * color.rgb;
+    vec3 result = lighting * color.rgb;
     FragColor = vec4(result, color.a);
 }

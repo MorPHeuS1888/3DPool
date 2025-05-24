@@ -54,6 +54,7 @@ Window::Window(int width, int height, const char* title) : width(width), height(
     glDepthFunc(GL_LESS);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
+    background.Load();
     poolTable.setup();
     balls.setup();
 }
@@ -84,7 +85,7 @@ void Window::processInput() {
 void Window::update(PoolLibrary::Renderable* scene, float deltaTime) {
     animation.Update(deltaTime);
 
-    // Atualiza matriz de projeção com novo aspect ratio
+    // Atualiza matriz de projeção
     glm::mat4 projection = glm::perspective(
         glm::radians(70.0f),
         static_cast<float>(width) / static_cast<float>(height),
@@ -92,24 +93,29 @@ void Window::update(PoolLibrary::Renderable* scene, float deltaTime) {
         20.0f
     );
 
-    // Calcular matriz global (rotação + zoom)
+    // Matrizes de transformação global (para a cena, não para o skybox)
     glm::mat4 globalModel = glm::mat4(1.0f);
     globalModel = glm::translate(globalModel, glm::vec3(0.0f, 0.0f, zoom));
     globalModel = glm::rotate(globalModel, rotationX, glm::vec3(1.0f, 0.0f, 0.0f));
     globalModel = glm::rotate(globalModel, rotationY, glm::vec3(0.0f, 1.0f, 0.0f));
+
+    // View matrix da câmera (sem transformações globais)
     glm::mat4 view = camera.getViewMatrix();
     glm::vec3 lightPos(1.0f, 2.0f, 2.0f);
     glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
-    // Enviar para o shader
+    // 1. Primeiro renderiza o skybox (sem transformações globais)
+    glDepthMask(GL_FALSE); // Desativa escrita no depth buffer
+    background.applySceneContext(view, projection, lightPos, camera.getPosition(), lightColor, true);
+    glDepthMask(GL_TRUE); // Reativa para outros objetos
+
+    // 2. Depois renderiza a cena com transformações globais
     glUseProgram(scene->getShaderProgram());
     glUniformMatrix4fv(
         glGetUniformLocation(scene->getShaderProgram(), "globalModel"),
         1, GL_FALSE, glm::value_ptr(globalModel)
     );
 
-    // Atualiza as luzes para a vista principal
-  
     light.update(scene->getShaderProgram(), camera.getPosition());
 
     // Renderização principal
@@ -162,9 +168,15 @@ void Window::update(PoolLibrary::Renderable* scene, float deltaTime) {
 void Window::updateSceneContext(float deltaTime) {
     animation.Update(deltaTime);
 
-    // Atualizar e renderizar a mesa
+
+
+    update(&background, deltaTime);
+
+
+    // 2. Atualizar e renderizar a mesa
     update(&poolTable, deltaTime);
-    // Atualizar e renderizar as bolas
+
+    // 3. Atualizar e renderizar as bolas
     update(&balls, deltaTime);
 }
 
