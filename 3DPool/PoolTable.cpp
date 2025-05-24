@@ -1,4 +1,3 @@
-// PoolTable.cpp
 #define GLEW_STATIC
 #include "PoolTable.h"
 #include "ShaderUtils.h"

@@ -1,5 +1,4 @@
-﻿
-#include "Window.h"
+﻿#include "Window.h"
 #include "PoolTable.h"
 #include "Balls.h"
 

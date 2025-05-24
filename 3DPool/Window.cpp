@@ -39,7 +39,7 @@ Window::Window(int width, int height, const char* title) : width(width), height(
     glfwSetCursorPosCallback(window, mouseCallback);
     glfwSetMouseButtonCallback(window, mouseButtonCallback);
     glfwSetScrollCallback(window, scrollCallback);
-    glfwSetFramebufferSizeCallback(window, framebufferSizeCallback); // Novo callback
+    glfwSetFramebufferSizeCallback(window, framebufferSizeCallback); 
 
     // Inicializa o GLEW
     glewExperimental = GL_TRUE;
@@ -64,7 +64,7 @@ Window::~Window() {
     glfwTerminate();
 }
 
-// Callback de redimensionamento (novo)
+// Callback de redimensionamento
 void Window::framebufferSizeCallback(GLFWwindow* window, int width, int height) {
     Window* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
     self->width = width;
@@ -73,7 +73,7 @@ void Window::framebufferSizeCallback(GLFWwindow* window, int width, int height) 
 }
 
 bool Window::shouldClose() const {
-    return glfwWindowShouldClose(window); // Retorna o status de fechamento da janela
+    return glfwWindowShouldClose(window); // para fechar a janela
 }
 
 void Window::processInput() {
@@ -93,7 +93,7 @@ void Window::update(PoolLibrary::Renderable* scene, float deltaTime) {
         20.0f
     );
 
-    // Matrizes de transformação global (para a cena, não para o skybox)
+    // Matrizes de transformação global 
     glm::mat4 globalModel = glm::mat4(1.0f);
     globalModel = glm::translate(globalModel, glm::vec3(0.0f, 0.0f, zoom));
     globalModel = glm::rotate(globalModel, rotationX, glm::vec3(1.0f, 0.0f, 0.0f));
@@ -104,12 +104,12 @@ void Window::update(PoolLibrary::Renderable* scene, float deltaTime) {
     glm::vec3 lightPos(1.0f, 2.0f, 2.0f);
     glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
-    //Renderiza o skybox com apenas a rotação (sem translação)
+    //Renderiza o skybox com apenas a rotação 
     glDepthMask(GL_FALSE); // Desativa escrita no depth buffer
 
     //Cria uma matriz de view apenas com rotação para o skybox
     glm::mat4 skyboxView = glm::mat4(glm::mat3(view)); // Remove translação
-    skyboxView = glm::rotate(skyboxView, rotationY, glm::vec3(0.0f, 1.0f, 0.0f)); // Aplica rotação Y
+    skyboxView = glm::rotate(skyboxView, rotationY, glm::vec3(0.0f, 1.0f, 0.0f)); // Aplica rotação Y rotação e removi a rotação em X 
 
     background.applySceneContext(skyboxView, projection, lightPos, camera.getPosition(), lightColor, true);
     glDepthMask(GL_TRUE); // Reativa para outros objetos
@@ -174,7 +174,7 @@ void Window::updateSceneContext(float deltaTime) {
     animation.Update(deltaTime);
 
      
-
+    //Atualizar o background
     update(&background, deltaTime);
 
 
@@ -186,55 +186,50 @@ void Window::updateSceneContext(float deltaTime) {
 }
 
 
-// Outros callbacks mantidos iguais
+
 void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     Window* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
     if (action == GLFW_PRESS) {
-        std::cout << "Key PRESSED: ";
         switch (key) {
         case GLFW_KEY_1:
             self->light.toggleAmbient();
-            std::cout << "1 (Ambient light) - Estado: "
+            std::cout << "1 Luz Ambiente --> "
                 << (self->light.isAmbientEnabled() ? "ON" : "OFF");
             break;
         case GLFW_KEY_2:
             self->light.toggleDirectional();
-            std::cout << "2 (Directional light) - Estado: "
+            std::cout << "2 Luz Direcional --> "
                 << (self->light.isDirectionalEnabled() ? "ON" : "OFF");
             break;
         case GLFW_KEY_3:
             self->light.togglePoint();
-            std::cout << "3 (Point light) - Estado: "
+            std::cout << "3 Luz Pontual --> "
                 << (self->light.isPointEnabled() ? "ON" : "OFF");
             break;
         case GLFW_KEY_4:
             self->light.toggleSpot();
-            std::cout << "4 (Spot light) - Estado: "
+            std::cout << "4 Luz Cónica --> "
                 << (self->light.isSpotEnabled() ? "ON" : "OFF");
             break;
         case GLFW_KEY_ESCAPE:
-            std::cout << "ESC key pressed - closing window" << std::endl;
             glfwSetWindowShouldClose(window, true);
             break;
         case GLFW_KEY_SPACE:
             if (!self->animation.IsAnimating()) {
-                std::cout << "\n--- STARTING NEW ANIMATION ---\n";
+                std::cout << "\n--- Animação ---\n";
                 self->animation.StartRandomAnimation();
             }
             else {
-                std::cout << "Animation already in progress!\n";
+                std::cout << "Animação ja aa decorrer\n";
             }
             break;
         default:
-            std::cout << "Unknown key: " << key;
             break;
         }
         std::cout << std::endl;
     }
     else if (action == GLFW_REPEAT) {
-        // Mantido igual pois o repeat não altera estados
-        std::cout << "Key REPEAT: ";
         switch (key) {
         case GLFW_KEY_1: std::cout << "1"; break;
         case GLFW_KEY_2: std::cout << "2"; break;
@@ -250,7 +245,7 @@ void Window::mouseCallback(GLFWwindow* window, double xpos, double ypos) {
     Window* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
     if (self->isMouseDragging) {
         self->rotationY += (xpos - self->lastMouseX) * 0.01f;
-        self->rotationX += (self->lastMouseY - ypos) * 0.01f; // Invertido para movimento natural
+        self->rotationX += (self->lastMouseY - ypos) * 0.01f; 
         self->lastMouseX = xpos;
         self->lastMouseY = ypos;
     }
@@ -271,5 +266,5 @@ void Window::scrollCallback(GLFWwindow* window, double xoffset, double yoffset) 
 }
 
 GLFWwindow* Window::getWindow() const {
-    return window; // Retorna o ponteiro da janela GLFW
+    return window; 
 }

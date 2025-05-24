@@ -7,9 +7,7 @@
 
 
 Animation::Animation(Balls& balls, PoolTable& table)
-    : m_balls(balls), m_table(table), m_totalRotationAngle(0.0f) {
-    std::cout << "Animation System Initialized\n";
-}
+    : m_balls(balls), m_table(table), m_totalRotationAngle(0.0f) { }
 
 void Animation::Update(float deltaTime) {
     if (!m_isAnimating) return;
@@ -32,13 +30,13 @@ void Animation::Update(float deltaTime) {
     
 
     // Debug: Mostrar movimento
-    std::cout << "Ball " << (m_activeBall + 1)
-        << " | Velocity: (" << m_currentVelocity.x << ", " << m_currentVelocity.z << ")"
-        << " | Rotation Axis: (" << m_rotationAxis.x << ", " << m_rotationAxis.y << ", " << m_rotationAxis.z << ")"
-        << " | Rotation Angle: " << glm::degrees(m_totalRotationAngle) << " degrees\n";
+    std::cout << "Bola " << (m_activeBall + 1)
+        << " | Velocidade: (" << m_currentVelocity.x << ", " << m_currentVelocity.z << ")"
+        << " | Rotação do Eixo: (" << m_rotationAxis.x << ", " << m_rotationAxis.y << ", " << m_rotationAxis.z << ")"
+        << " | Angulo de rotação: " << glm::degrees(m_totalRotationAngle) << " graus\n";
 
     if (CheckCollisions(newPos)) {
-        std::cout << "Collision Detected! Stopping animation.\n";
+        std::cout << "Colisão foi detetada.\n";
         m_isAnimating = false;
         return;
     }
@@ -49,7 +47,7 @@ void Animation::Update(float deltaTime) {
 
 void Animation::StartRandomAnimation() {
     if (m_isAnimating) {
-        std::cout << "Animation already running\n";
+        std::cout << "A animação já se está a decorrer\n";
         return;
     }
 
@@ -65,8 +63,8 @@ void Animation::StartRandomAnimation() {
     m_rotationAxis = glm::normalize(glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), moveDir));
     m_totalRotationAngle = 0.0f;
 
-    std::cout << "Starting animation - Ball: " << m_activeBall
-        << " | Direction: (" << m_currentVelocity.x << ", " << m_currentVelocity.z << ")\n";
+    std::cout << "A começar animação - Bola: " << m_activeBall
+        << " | Direção: (" << m_currentVelocity.x << ", " << m_currentVelocity.z << ")\n";
 
     m_isAnimating = true;
 }
@@ -74,19 +72,19 @@ void Animation::StartRandomAnimation() {
 bool Animation::CheckCollisions(const glm::vec3& newPosition) {
     // Debug de bordas
     if (newPosition.x < -0.7f) {
-        std::cout << "Collision with LEFT wall\n";
+        std::cout << "Colisão com a parede esquerda\n";
         return true;
     }
     if (newPosition.x > 0.7f) {
-        std::cout << "Collision with RIGHT wall\n";
+        std::cout << "Colisão com a parede direita\n";
         return true;
     }
     if (newPosition.z < -1.4f) {
-        std::cout << "Collision with BOTTOM wall\n";
+        std::cout << "Colisão com a parede de baixp\n";
         return true;
     }
     if (newPosition.z > 1.4f) {
-        std::cout << "Collision with TOP wall\n";
+        std::cout << "Colisão com a parede de cima\n";
         return true;
     }
 
@@ -121,7 +119,7 @@ void Animation::GenerateRandomDirection() {
     m_currentVelocity *= 0.3f;
 
     // Debug: Mostrar direção gerada
-    std::cout << "Generated Direction: ("
+    std::cout << "Direção: ("
         << m_currentVelocity.x << ", "
         << m_currentVelocity.z << ")\n";
 }
