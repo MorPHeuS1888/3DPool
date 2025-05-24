@@ -70,7 +70,7 @@ void Animation::StartRandomAnimation() {
 }
 
 bool Animation::CheckCollisions(const glm::vec3& newPosition) {
-    // Debug de bordas
+    // Debug de colisaõ com as  bordas d mesa
     if (newPosition.x < -0.7f) {
         std::cout << "Colisão com a parede esquerda\n";
         return true;

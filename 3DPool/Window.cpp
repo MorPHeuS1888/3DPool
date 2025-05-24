@@ -104,15 +104,15 @@ void Window::update(PoolLibrary::Renderable* scene, float deltaTime) {
     glm::vec3 lightPos(1.0f, 2.0f, 2.0f);
     glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
-    //Renderiza o skybox com apenas a rotação 
-    glDepthMask(GL_FALSE); // Desativa escrita no depth buffer
+    //Renderiza o skybox com apenas a rotação desativa o depth mask para evitar que o skybox seja afetado por objetos próximos
+    glDepthMask(GL_FALSE);
 
-    //Cria uma matriz de view apenas com rotação para o skybox
+    //Gera apenas rotação
     glm::mat4 skyboxView = glm::mat4(glm::mat3(view)); // Remove translação
     skyboxView = glm::rotate(skyboxView, rotationY, glm::vec3(0.0f, 1.0f, 0.0f)); // Aplica rotação Y rotação e removi a rotação em X 
 
     background.applySceneContext(skyboxView, projection, lightPos, camera.getPosition(), lightColor, true);
-    glDepthMask(GL_TRUE); // Reativa para outros objetos
+    glDepthMask(GL_TRUE); 
 
     //Depois renderiza a cena com transformações globais
     glUseProgram(scene->getShaderProgram());
@@ -140,11 +140,11 @@ void Window::update(PoolLibrary::Renderable* scene, float deltaTime) {
         miniMapSize
     );
 
-    glm::mat4 miniMapProjection = glm::ortho(-1.5f, 1.5f, -2.5f, 0.5f, 0.1f, 10.0f);
+    glm::mat4 miniMapProjection = glm::ortho(-1.5f, 1.5f, -2.5f, 0.5f, 0.1f, 10.0f); //camara ortogonal para o mini mapa
     glm::mat4 miniMapView = glm::lookAt(
         glm::vec3(0.0f, 5.0f, 0.0f), // Posição da câmera (acima da mesa)
-        glm::vec3(0.0f, 0.0f, -1.0f), // Olhando para o centro da mesa
-        glm::vec3(0.0f, 0.0f, -1.0f)  // Orientação corrigida (eixo Y para cima)
+        glm::vec3(0.0f, 0.0f, -1.0f), // Aponta para o centro da mesa
+        glm::vec3(0.0f, 0.0f, -1.0f)  // Orientação 
     );
 
     if (scene) {
@@ -157,7 +157,7 @@ void Window::update(PoolLibrary::Renderable* scene, float deltaTime) {
         glUniform1i(glGetUniformLocation(shader, "spotEnabled"), 0);
         glUniform3f(glGetUniformLocation(shader, "ambientLight"), 1.0f, 1.0f, 1.0f);
 
-        // Renderize sem aplicar transformações globais (globalModel)
+        // Não aplica trnsformações globais no mini mapa
         glUniformMatrix4fv(
             glGetUniformLocation(shader, "globalModel"),
             1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)) // Matriz identidade
