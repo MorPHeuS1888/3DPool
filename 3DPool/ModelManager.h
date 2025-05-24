@@ -15,7 +15,7 @@ namespace PoolLibrary {
             int vertexCount;
             std::vector<float> vertices;
             std::string texturePath;
-            glm::vec3 scale = glm::vec3(1.0f); // Nova linha
+            glm::vec3 scale = glm::vec3(1.0f);
         };
 
         bool Load(const std::string& obj_model_filepath);
@@ -38,7 +38,7 @@ namespace PoolLibrary {
     class Renderable {
     public:
         virtual ~Renderable() = default;
-        virtual GLuint getShaderProgram() const = 0; // Mantenha 'const' aqui
+        virtual GLuint getShaderProgram() const = 0;
         virtual void applySceneContext(const glm::mat4& view, const glm::mat4& projection,
             const glm::vec3& lightPos, const glm::vec3& viewPos,
             const glm::vec3& lightColor, bool useLighting) = 0;

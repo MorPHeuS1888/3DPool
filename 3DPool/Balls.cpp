@@ -11,13 +11,9 @@
 #include "ModelManager.h"
 
 
-
-// Rest of the Balls class implementation remains the same, but using ModelManager
 Balls::Balls() : shaderProgram(0) {}
 
-Balls::~Balls() {
-    // VAOs, VBOs and textures are now managed by ModelManager
-}
+Balls::~Balls() { }
 
 void Balls::setup() {
     ballPositions.resize(15);
@@ -98,7 +94,7 @@ void Balls::setup() {
 void Balls::SetBallPosition(int index, const glm::vec3& pos) {
     if (index >= 0 && index < balls.size()) {
         balls[index].position = pos; // Atualiza a posição de renderização
-        balls[index].model.SetScale(glm::vec3(0.05f)); // Garante que a escala está correta
+        balls[index].model.SetScale(glm::vec3(0.05f)); // Garante que a escala está correta pos ela é alterada 
     }
 }
 

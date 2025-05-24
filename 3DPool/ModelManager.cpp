@@ -60,18 +60,18 @@ namespace PoolLibrary {
         for (unsigned int idx : indices) {
             const glm::vec3& v = temp_vertices[idx];
 
-            // Position
+            // Posição
             modelData.vertices.push_back(v.x);
             modelData.vertices.push_back(v.y);
             modelData.vertices.push_back(v.z);
 
-            // Normal (sphere-based)
+            // Normal
             glm::vec3 n = glm::normalize(v);
             modelData.vertices.push_back(n.x);
             modelData.vertices.push_back(n.y);
             modelData.vertices.push_back(n.z);
 
-            // UV coordinates
+            // Coordenadas de textura
             float u = 0.5f + std::atan2(v.z, v.x) / (2 * glm::pi<float>());
             float v_tex = 0.5f - std::asin(v.y) / glm::pi<float>();
             modelData.vertices.push_back(u);
@@ -104,7 +104,7 @@ namespace PoolLibrary {
                 modelData.texturePath = directory + texFile;
 
                 // Carregar textura com flip correto
-                stbi_set_flip_vertically_on_load(false); // Já corrigimos nas UVs
+                stbi_set_flip_vertically_on_load(false); 
 
             }
         }
@@ -177,7 +177,6 @@ namespace PoolLibrary {
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(modelMatrix));
         }
 
-        // Renderizar
         glBindVertexArray(modelData.VAO);
         if (modelData.textureID != 0) {
             glActiveTexture(GL_TEXTURE0);

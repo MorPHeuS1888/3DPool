@@ -11,14 +11,14 @@ Background::~Background() {
 }
 
 bool Background::Load() {
-    // 1. Carregar texturas do cubemap
+    //Carregar texturas do cubemap
     cubemapTexture = loadCubemap();
     if (cubemapTexture == 0) return false;
 
-    // 2. Configurar geometria
+    //Configurar geometria
     setupGeometry();
 
-    // 3. Carregar shaders (usando os mesmos shaders da mesa e bolas)
+    //Carregar shaders (usando os mesmos shaders da mesa e bolas)
     ShaderInfo shaders[] = {
         { GL_VERTEX_SHADER, "shaders/vertexShader.ver" },
         { GL_FRAGMENT_SHADER, "shaders/fragmentShader.frag" },
@@ -28,7 +28,7 @@ bool Background::Load() {
     shaderProgram = LoadShaders(shaders);
     if (shaderProgram == 0) return false;
 
-    // 4. Configurar atributos do shader
+    //Configurar atributos do shader
     model.Install();
     model.BindShaderAttributes(shaderProgram);
 
@@ -37,19 +37,19 @@ bool Background::Load() {
 
 GLuint Background::loadCubemap() {
     std::vector<std::string> faces = {
-        "textures/skyboxRight.jpg",  // POSITIVE_X
-        "textures/skyboxLeft.jpg",   // NEGATIVE_X
-        "textures/skyboxUp.jpg",    // POSITIVE_Y
-        "textures/skyboxDown.jpg", // NEGATIVE_Y
-        "textures/skyboxFront.jpg",  // POSITIVE_Z
-        "textures/skyboxBack.jpg"    // NEGATIVE_Z
+        "textures/skyboxRight.jpg",  
+        "textures/skyboxLeft.jpg",   
+        "textures/skyboxUp.jpg",    
+        "textures/skyboxDown.jpg", 
+        "textures/skyboxFront.jpg", 
+        "textures/skyboxBack.jpg"    
     };
 
     GLuint textureID;
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
-    stbi_set_flip_vertically_on_load(true); // Importante!
+    stbi_set_flip_vertically_on_load(true); // neste caso foi preciso inverter stb_image  
 
     int width, height, nrChannels;
     for (unsigned int i = 0; i < faces.size(); i++) {
@@ -78,9 +78,9 @@ GLuint Background::loadCubemap() {
 }
 
 void Background::setupGeometry() {
-    // Define os vértices da skybox (cubo grande) - ordem corrigida
+    // Define os vértices da skybox 
     std::vector<float> vertices = {
-        // Face direita (POSITIVE_X)
+        // Face direita
          1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
          1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 0.0f,
          1.0f,  1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 1.0f,
@@ -88,7 +88,7 @@ void Background::setupGeometry() {
          1.0f,  1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
          1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
 
-         // Face esquerda (NEGATIVE_X)
+         // Face esquerda 
          -1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
          -1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 0.0f,
          -1.0f,  1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 1.0f,
@@ -96,7 +96,7 @@ void Background::setupGeometry() {
          -1.0f,  1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
          -1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
 
-         // Face superior (POSITIVE_Y)
+         // Face superior 
          -1.0f,  1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
           1.0f,  1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 0.0f,
           1.0f,  1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 1.0f,
@@ -104,7 +104,7 @@ void Background::setupGeometry() {
          -1.0f,  1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
          -1.0f,  1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
 
-         // Face inferior (NEGATIVE_Y)
+         // Face inferior 
          -1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
          -1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 0.0f,
           1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
@@ -112,7 +112,7 @@ void Background::setupGeometry() {
          -1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 0.0f,
           1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 1.0f,
 
-          // Face frontal (POSITIVE_Z)
+          // Face frontal 
           -1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
           -1.0f,  1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 0.0f,
            1.0f,  1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 1.0f,
@@ -120,7 +120,7 @@ void Background::setupGeometry() {
            1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 1.0f,
           -1.0f, -1.0f,  1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 
 
-          // Face traseira (NEGATIVE_Z)
+          // Face traseira 
           -1.0f,  1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  0.0f, 0.0f,
           -1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 0.0f,
            1.0f, -1.0f, -1.0f,  0.0f, 0.0f, 0.0f,  1.0f, 1.0f,
@@ -139,7 +139,7 @@ void Background::applySceneContext(const glm::mat4& view, const glm::mat4& proje
 
     if (!shaderProgram) return;
 
-    // Otimização: Cache dos uniform locations
+    //Cache dos uniform locations
     static GLint useSkyboxLoc = glGetUniformLocation(shaderProgram, "useSkybox");
     static GLint modelLoc = glGetUniformLocation(shaderProgram, "model");
     static GLint viewLoc = glGetUniformLocation(shaderProgram, "view");
@@ -148,10 +148,10 @@ void Background::applySceneContext(const glm::mat4& view, const glm::mat4& proje
 
     glUseProgram(shaderProgram);
 
-    // 1. Configuração do modo skybox
+    //Configuração do modo skybox
     glUniform1i(useSkyboxLoc, 1);
 
-    // 2. Configuração das matrizes (otimizado)
+    //Configuração das matrizes
     const glm::mat4 modelMatrix(1.0f); // Matriz identidade
     const glm::mat4 viewSkybox = glm::mat4(glm::mat3(view)); // Remove translação
 
@@ -159,12 +159,12 @@ void Background::applySceneContext(const glm::mat4& view, const glm::mat4& proje
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(viewSkybox));
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-    // 3. Configuração da textura (otimizado)
+    //Configuração da textura 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
     glUniform1i(skyboxLoc, 0);
 
-    // 4. Configurações de estado OpenGL (agrupadas)
+    //Configurações de estado OpenGL 
     GLboolean cullFaceEnabled;
     glGetBooleanv(GL_CULL_FACE, &cullFaceEnabled);
 
@@ -175,15 +175,15 @@ void Background::applySceneContext(const glm::mat4& view, const glm::mat4& proje
     glDepthFunc(GL_LEQUAL);
     glDisable(GL_CULL_FACE);
 
-    // 5. Renderização (versão simplificada)
+    //Renderização
     model.Render(glm::vec3(0.0f), glm::vec3(0.0f));
 
-    // 6. Restauração precisa do estado anterior
+    //Restauração precisa do estado anterior
     if (cullFaceEnabled) glEnable(GL_CULL_FACE);
     glDepthFunc(depthFunc);
     glDepthMask(GL_TRUE);
 
-    // 7. Limpeza (mais robusta)
+    //Limpeza 
     glUniform1i(useSkyboxLoc, 0);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0);

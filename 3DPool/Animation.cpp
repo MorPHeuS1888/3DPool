@@ -96,7 +96,7 @@ bool Animation::CheckCollisions(const glm::vec3& newPosition) {
         if (i == m_activeBall) continue;
         glm::vec3 otherPos = m_balls.GetBallPosition(i);
         float distance = glm::distance(newPosition, otherPos);
-        if (distance < (ballRadius * 2)) { // 0.1 unidades de distância
+        if (distance < (ballRadius * 2)) { 
             return true;
         }
     }
@@ -117,10 +117,10 @@ void Animation::GenerateRandomDirection() {
         glm::sin(angle)
     );
 
-    // Define velocidade fixa (ex: 3.0 unidades/segundo)
+    //Velocidade fixa
     m_currentVelocity *= 0.3f;
 
-    // Debug: Verifique valores
+    // Debug: Mostrar direção gerada
     std::cout << "Generated Direction: ("
         << m_currentVelocity.x << ", "
         << m_currentVelocity.z << ")\n";

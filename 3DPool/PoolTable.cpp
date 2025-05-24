@@ -8,9 +8,7 @@
 
 PoolTable::PoolTable() {}
 
-PoolTable::~PoolTable() {
-    // ModelManager handles its own cleanup
-}
+PoolTable::~PoolTable() { }
 
 void PoolTable::setup() {
     ShaderInfo shaders[] = {
@@ -73,8 +71,7 @@ void PoolTable::setup() {
             0.71f, -0.39f,  1.42f,  0.0f, -1.0f, 0.0f,  0.0f, 0.0f
     };
 
-    // Since PoolTable is a simple geometric shape we define programmatically,
-    // we'll directly set the vertices in the ModelManager
+    // visto que cada v��rtice tem 8 elementos (posi����o, normal e coordenadas de textura)
     model.GetModelData().vertices = vertices;
     model.GetModelData().vertexCount = vertices.size() / 8; // 8 elements per vertex
     model.Install();

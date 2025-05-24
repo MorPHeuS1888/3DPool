@@ -17,7 +17,7 @@ public:
         const glm::vec3& lightPos, const glm::vec3& viewPos,
         const glm::vec3& lightColor, bool useLighting) override;
     GLuint getShaderProgram() const override { return shaderProgram; }
-    size_t GetBallCount() const { return 15; } // Número fixo de 15 bolas
+    size_t GetBallCount() const { return 15; } 
     glm::vec3 GetBallRotation(int index) const;
     void SetBallRotation(int index, const glm::vec3& rotation);
     glm::vec3 GetBallPosition(int index) const;

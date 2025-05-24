@@ -104,17 +104,17 @@ void Window::update(PoolLibrary::Renderable* scene, float deltaTime) {
     glm::vec3 lightPos(1.0f, 2.0f, 2.0f);
     glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 
-    // 1. Renderiza o skybox com apenas a rotação (sem translação)
+    //Renderiza o skybox com apenas a rotação (sem translação)
     glDepthMask(GL_FALSE); // Desativa escrita no depth buffer
 
-    // Cria uma matriz de view apenas com rotação para o skybox
+    //Cria uma matriz de view apenas com rotação para o skybox
     glm::mat4 skyboxView = glm::mat4(glm::mat3(view)); // Remove translação
     skyboxView = glm::rotate(skyboxView, rotationY, glm::vec3(0.0f, 1.0f, 0.0f)); // Aplica rotação Y
 
     background.applySceneContext(skyboxView, projection, lightPos, camera.getPosition(), lightColor, true);
     glDepthMask(GL_TRUE); // Reativa para outros objetos
 
-    // 2. Depois renderiza a cena com transformações globais
+    //Depois renderiza a cena com transformações globais
     glUseProgram(scene->getShaderProgram());
     glUniformMatrix4fv(
         glGetUniformLocation(scene->getShaderProgram(), "globalModel"),
@@ -173,15 +173,15 @@ void Window::update(PoolLibrary::Renderable* scene, float deltaTime) {
 void Window::updateSceneContext(float deltaTime) {
     animation.Update(deltaTime);
 
-
+     
 
     update(&background, deltaTime);
 
 
-    // 2. Atualizar e renderizar a mesa
+    //Atualizar e renderizar a mesa
     update(&poolTable, deltaTime);
 
-    // 3. Atualizar e renderizar as bolas
+    //Atualizar e renderizar as bolas
     update(&balls, deltaTime);
 }
 

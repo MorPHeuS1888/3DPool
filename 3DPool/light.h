@@ -1,5 +1,4 @@
-#ifndef LIGHT_H
-#define LIGHT_H
+#pragma once 
 
 #include <glm/glm.hpp>
 #include <GL/glew.h>
@@ -42,4 +41,4 @@ private:
     LightParams spot;
 };
 
-#endif // LIGHT_H
+

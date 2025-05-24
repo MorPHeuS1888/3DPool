@@ -11,11 +11,11 @@ int main() {
     while (!mainWindow.shouldClose()) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         double currentTime = glfwGetTime();
-        float deltaTime = static_cast<float>(currentTime - lastTime);
-        lastTime = currentTime;
+        float deltaTime = static_cast<float>(currentTime - lastTime); // tempo desde o último frame
+        lastTime = currentTime; 
 
         mainWindow.processInput();
-        mainWindow.updateSceneContext(deltaTime); // Atualiza e renderiza todas as cenas
+        mainWindow.updateSceneContext(deltaTime); // isto renderiza tudo por ordem 
 
         glfwSwapBuffers(mainWindow.getWindow());
         glfwPollEvents();
