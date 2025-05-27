@@ -1,18 +1,12 @@
-﻿  Animation.cpp
+﻿  ModelManager.cpp
 C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\ModelManager.h(28,53): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
-  (compilando o arquivo fonte 'Animation.cpp')
+  (compilando o arquivo fonte 'ModelManager.cpp')
   
-  Window.cpp
-C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\ModelManager.h(28,53): warning C4267: '=': conversão de 'size_t' para 'int', possível perda de dados
-  (compilando o arquivo fonte 'Window.cpp')
-  
-C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Window.cpp(247,54): warning C4244: '+=': conversão de 'double' para 'float', possível perda de dados
-C:\Users\Paiva\Documents\UNI\2-Ano\2 Semestre\Programação 3D\PROJETO\3DPool\3DPool\Window.cpp(248,54): warning C4244: '+=': conversão de 'double' para 'float', possível perda de dados
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflita com uso de outras bibliotecas; use /NODEFAULTLIB:library
   Gerando código
-  0 of 870 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  8 of 870 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    70 functions had inline decision re-evaluated but remain unchanged
   Finalizada a geração de código
 glew32s.lib(glew.obj) : warning LNK4099: PDB '' não foi encontrado 'glew32s.lib(glew.obj)' ou no ''; vinculando objeto quando quando sem nenhuma informação de depuração
 LINK : warning LNK4286: o símbolo '__glewUniformMatrix4fv' definido em 'glew32s.lib(glew.obj)' é importado por 'background.obj'

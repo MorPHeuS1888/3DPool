@@ -99,6 +99,9 @@ void PoolTable::applySceneContext(const glm::mat4& view, const glm::mat4& projec
     glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 0.0f, 0.6f, 0.0f);
 
     // Renderiza a mesa de bilhar
-    model.Render(glm::vec3(0.0f), glm::vec3(0.0f));
+    glm::vec3 position(0.0f, 0.0f, 0.0f);
+    glm::vec3 rotation(0.0f, 0.0f, 0.0f);
+    model.Render(position, rotation);
+
 }
 

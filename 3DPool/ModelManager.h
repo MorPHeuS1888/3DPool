@@ -18,9 +18,9 @@ namespace PoolLibrary {
             glm::vec3 scale = glm::vec3(1.0f);
         };
 
-        bool Load(const std::string& obj_model_filepath);
+        bool Load(const std::string obj_model_filepath);
         void Install(void);
-        void Render(const glm::vec3& position, const glm::vec3& orientation);
+        void Render(glm::vec3 position, glm::vec3 orientation);
         void BindShaderAttributes(GLuint shaderProgram);
         void SetScale(const glm::vec3& scale) { modelData.scale = scale; }
         void SetVertices(const std::vector<float>& vertices) {
